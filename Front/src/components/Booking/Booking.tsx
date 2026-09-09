@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { getServices, type ApiService } from "../../services/servicesApi";
 import { createAppointment } from "../../services/bookingApi";
 import styles from "./Booking.module.css";
@@ -20,7 +20,7 @@ interface BookingFormErrors {
   time?: string;
 }
 
-const timeSlots: string[] = [
+const timeSlots = [
   "09:00",
   "10:00",
   "11:00",
@@ -43,13 +43,63 @@ const initialFormState: BookingFormState = {
 function validate(form: BookingFormState): BookingFormErrors {
   const errors: BookingFormErrors = {};
 
-  if (!form.name.trim()) errors.name = "Informe seu nome completo.";
-  if (!form.whatsapp.trim()) errors.whatsapp = "Informe um número de WhatsApp.";
-  if (!form.serviceName) errors.serviceName = "Selecione o serviço desejado.";
-  if (!form.date) errors.date = "Selecione a data preferida.";
-  if (!form.time) errors.time = "Selecione o horário preferido.";
+  if (!form.name.trim()) {
+    errors.name = "Informe seu nome completo.";
+  }
+
+  if (!form.whatsapp.trim()) {
+    errors.whatsapp = "Informe seu WhatsApp.";
+  }
+
+  if (!form.serviceName) {
+    errors.serviceName = "Escolha um serviço.";
+  }
+
+  if (!form.date) {
+    errors.date = "Escolha uma data.";
+  }
+
+  if (!form.time) {
+    errors.time = "Escolha um horário.";
+  }
 
   return errors;
+}
+
+function formatPhone(value: string): string {
+  const numbers = value.replace(/\D/g, "").slice(0, 11);
+
+  if (numbers.length <= 2) {
+    return numbers;
+  }
+
+  if (numbers.length <= 7) {
+    return `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`;
+  }
+
+  return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7)}`;
+}
+
+function formatDate(date: string): string {
+  if (!date) return "Não selecionada";
+
+  const parsedDate = new Date(`${date}T12:00:00`);
+
+  return new Intl.DateTimeFormat("pt-BR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(parsedDate);
+}
+
+function getToday(): string {
+  const today = new Date();
+
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
 }
 
 export function Booking() {
@@ -70,10 +120,13 @@ export function Booking() {
         setServicesError("");
 
         const data = await getServices();
+
         setServices(data.filter((service) => service.active));
       } catch (err) {
         setServicesError(
-          err instanceof Error ? err.message : "Erro ao carregar serviços.",
+          err instanceof Error
+            ? err.message
+            : "Erro ao carregar serviços.",
         );
       } finally {
         setServicesLoading(false);
@@ -83,18 +136,58 @@ export function Booking() {
     loadServices();
   }, []);
 
-  function handleChange(field: keyof BookingFormState, value: string) {
-    setForm((previous) => ({ ...previous, [field]: value }));
-    setErrors((previous) => ({ ...previous, [field]: undefined }));
+  const selectedService = useMemo(
+    () =>
+      services.find(
+        (service) => service.name === form.serviceName,
+      ),
+    [services, form.serviceName],
+  );
+
+  const selectedServicePrice = selectedService
+    ? new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      }).format(selectedService.price)
+    : null;
+
+  function handleChange(
+    field: keyof BookingFormState,
+    value: string,
+  ) {
+    setForm((previous) => ({
+      ...previous,
+      [field]: value,
+    }));
+
+    setErrors((previous) => ({
+      ...previous,
+      [field]: undefined,
+    }));
+
+    setSubmitError("");
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleWhatsappChange(value: string) {
+    handleChange("whatsapp", formatPhone(value));
+  }
+
+  function handleServiceSelect(serviceName: string) {
+    handleChange("serviceName", serviceName);
+  }
+
+  async function handleSubmit(
+    event: FormEvent<HTMLFormElement>,
+  ) {
     event.preventDefault();
 
     const validationErrors = validate(form);
+
     setErrors(validationErrors);
 
-    if (Object.keys(validationErrors).length > 0) return;
+    if (Object.keys(validationErrors).length > 0) {
+      return;
+    }
 
     try {
       setIsSubmitting(true);
@@ -114,7 +207,7 @@ export function Booking() {
       setSubmitError(
         error instanceof Error
           ? error.message
-          : "Erro ao enviar agendamento. Tente novamente.",
+          : "Não foi possível enviar sua solicitação. Tente novamente.",
       );
     } finally {
       setIsSubmitting(false);
@@ -123,6 +216,8 @@ export function Booking() {
 
   function handleNewRequest() {
     setIsSubmitted(false);
+    setErrors({});
+    setSubmitError("");
   }
 
   return (
@@ -131,210 +226,523 @@ export function Booking() {
       className={styles.booking}
       aria-labelledby="booking-heading"
     >
+      <div className={styles.decorativeGlow} aria-hidden="true" />
+
       <div className={styles.container}>
-        <div className={styles.intro}>
-          <span className={styles.eyebrow}>Agendamento</span>
+        <header className={styles.intro}>
+          <div className={styles.eyebrow}>
+            <span className={styles.eyebrowLine} aria-hidden="true" />
+            Agendamento
+          </div>
+
           <h2 id="booking-heading" className={styles.headline}>
-            Escolha seu horário com cuidado
+            Seu olhar merece
+            <span> um momento especial.</span>
           </h2>
+
           <p className={styles.subheadline}>
-            Preencha as informações abaixo para solicitar seu agendamento. A
-            confirmação será feita após a validação da disponibilidade.
+            Escolha o procedimento, encontre o melhor horário e
+            envie sua solicitação. Cuidamos dos detalhes para você.
           </p>
-        </div>
+
+          <div className={styles.introDetails}>
+            <div className={styles.detail}>
+              <span className={styles.detailNumber}>01</span>
+              <div>
+                <strong>Escolha</strong>
+                <span>seu procedimento</span>
+              </div>
+            </div>
+
+            <div className={styles.detail}>
+              <span className={styles.detailNumber}>02</span>
+              <div>
+                <strong>Encontre</strong>
+                <span>seu melhor horário</span>
+              </div>
+            </div>
+
+            <div className={styles.detail}>
+              <span className={styles.detailNumber}>03</span>
+              <div>
+                <strong>Confirme</strong>
+                <span>seu atendimento</span>
+              </div>
+            </div>
+          </div>
+        </header>
 
         <div className={styles.card}>
           {isSubmitted ? (
             <div className={styles.success} role="status">
-              <span className={styles.successMark} aria-hidden="true" />
-              <h3 className={styles.successTitle}>Solicitação enviada</h3>
+              <div className={styles.successIcon} aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                >
+                  <path d="m5 12 4.2 4.2L19 6.5" />
+                </svg>
+              </div>
+
+              <span className={styles.successEyebrow}>
+                Tudo certo
+              </span>
+
+              <h3 className={styles.successTitle}>
+                Solicitação enviada.
+              </h3>
+
               <p className={styles.successText}>
-                Recebemos seu pedido de agendamento. Em breve entraremos em
-                contato pelo WhatsApp informado para confirmar o horário.
+                Recebemos seus dados e sua preferência de horário.
+                Em breve entraremos em contato pelo WhatsApp para
+                confirmar a disponibilidade do atendimento.
               </p>
+
+              <div className={styles.successDivider} />
+
               <button
                 type="button"
                 className={styles.successButton}
                 onClick={handleNewRequest}
               >
                 Fazer nova solicitação
+                <span aria-hidden="true">→</span>
               </button>
             </div>
           ) : (
-            <form className={styles.form} onSubmit={handleSubmit} noValidate>
+            <form
+              className={styles.form}
+              onSubmit={handleSubmit}
+              noValidate
+            >
+              <div className={styles.formHeader}>
+                <div>
+                  <span className={styles.formEyebrow}>
+                    Reserve seu momento
+                  </span>
+
+                  <h3 className={styles.formTitle}>
+                    Vamos começar.
+                  </h3>
+                </div>
+
+                <span className={styles.formStep}>
+                  01 <span>/ 04</span>
+                </span>
+              </div>
+
               {submitError && (
-                <div className={styles.errorText} role="alert">
+                <div className={styles.submitError} role="alert">
+                  <span className={styles.errorDot} aria-hidden="true" />
                   {submitError}
                 </div>
               )}
 
-              <div className={styles.field}>
-                <label htmlFor="booking-name" className={styles.label}>
-                  Nome completo
-                </label>
-                <input
-                  id="booking-name"
-                  type="text"
-                  className={styles.input}
-                  value={form.name}
-                  onChange={(event) => handleChange("name", event.target.value)}
-                  aria-invalid={errors.name ? true : undefined}
-                  aria-describedby={
-                    errors.name ? "booking-name-error" : undefined
-                  }
-                />
-                {errors.name && (
-                  <span id="booking-name-error" className={styles.errorText}>
-                    {errors.name}
-                  </span>
-                )}
+              <div className={styles.section}>
+                <div className={styles.sectionHeading}>
+                  <span className={styles.sectionNumber}>01</span>
+
+                  <div>
+                    <h4>Seus dados</h4>
+                    <p>Como podemos falar com você?</p>
+                  </div>
+                </div>
+
+                <div className={styles.fieldGrid}>
+                  <div className={styles.field}>
+                    <label
+                      htmlFor="booking-name"
+                      className={styles.label}
+                    >
+                      Nome completo
+                    </label>
+
+                    <input
+                      id="booking-name"
+                      type="text"
+                      autoComplete="name"
+                      placeholder="Digite seu nome"
+                      className={styles.input}
+                      value={form.name}
+                      onChange={(event) =>
+                        handleChange(
+                          "name",
+                          event.target.value,
+                        )
+                      }
+                      aria-invalid={
+                        errors.name ? true : undefined
+                      }
+                      aria-describedby={
+                        errors.name
+                          ? "booking-name-error"
+                          : undefined
+                      }
+                    />
+
+                    {errors.name && (
+                      <span
+                        id="booking-name-error"
+                        className={styles.errorText}
+                      >
+                        {errors.name}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className={styles.field}>
+                    <label
+                      htmlFor="booking-whatsapp"
+                      className={styles.label}
+                    >
+                      WhatsApp
+                    </label>
+
+                    <input
+                      id="booking-whatsapp"
+                      type="tel"
+                      inputMode="numeric"
+                      autoComplete="tel"
+                      placeholder="(11) 99999-9999"
+                      className={styles.input}
+                      value={form.whatsapp}
+                      onChange={(event) =>
+                        handleWhatsappChange(
+                          event.target.value,
+                        )
+                      }
+                      aria-invalid={
+                        errors.whatsapp ? true : undefined
+                      }
+                      aria-describedby={
+                        errors.whatsapp
+                          ? "booking-whatsapp-error"
+                          : undefined
+                      }
+                    />
+
+                    {errors.whatsapp && (
+                      <span
+                        id="booking-whatsapp-error"
+                        className={styles.errorText}
+                      >
+                        {errors.whatsapp}
+                      </span>
+                    )}
+                  </div>
+                </div>
               </div>
 
-              <div className={styles.field}>
-                <label htmlFor="booking-whatsapp" className={styles.label}>
-                  WhatsApp
-                </label>
-                <input
-                  id="booking-whatsapp"
-                  type="tel"
-                  className={styles.input}
-                  value={form.whatsapp}
-                  onChange={(event) =>
-                    handleChange("whatsapp", event.target.value)
-                  }
-                  aria-invalid={errors.whatsapp ? true : undefined}
-                  aria-describedby={
-                    errors.whatsapp ? "booking-whatsapp-error" : undefined
-                  }
-                />
-                {errors.whatsapp && (
-                  <span
-                    id="booking-whatsapp-error"
-                    className={styles.errorText}
-                  >
-                    {errors.whatsapp}
-                  </span>
-                )}
-              </div>
+              <div className={styles.section}>
+                <div className={styles.sectionHeading}>
+                  <span className={styles.sectionNumber}>02</span>
 
-              <div className={styles.field}>
-                <label htmlFor="booking-service" className={styles.label}>
-                  Serviço desejado
-                </label>
-                <select
-                  id="booking-service"
-                  className={styles.select}
-                  value={form.serviceName}
-                  onChange={(event) =>
-                    handleChange("serviceName", event.target.value)
-                  }
-                  disabled={servicesLoading}
-                  aria-invalid={errors.serviceName ? true : undefined}
-                  aria-describedby={
-                    errors.serviceName ? "booking-service-error" : undefined
-                  }
-                >
-                  <option value="">
-                    {servicesLoading
-                      ? "Carregando serviços..."
-                      : "Selecione um serviço"}
-                  </option>
-                  {services.map((service) => (
-                    <option key={service.id} value={service.name}>
-                      {service.name}
-                    </option>
-                  ))}
-                </select>
-                {servicesError && (
-                  <span className={styles.errorText} role="alert">
-                    {servicesError}
-                  </span>
+                  <div>
+                    <h4>Seu procedimento</h4>
+                    <p>Escolha o serviço ideal para você.</p>
+                  </div>
+                </div>
+
+                {servicesLoading ? (
+                  <div className={styles.serviceLoading}>
+                    <span className={styles.loadingPulse} />
+                    <span>Carregando serviços...</span>
+                  </div>
+                ) : servicesError ? (
+                  <div className={styles.serviceError} role="alert">
+                    <span>{servicesError}</span>
+                  </div>
+                ) : services.length === 0 ? (
+                  <div className={styles.serviceError}>
+                    <span>
+                      Nenhum serviço disponível no momento.
+                    </span>
+                  </div>
+                ) : (
+                  <div className={styles.serviceGrid}>
+                    {services.map((service, index) => {
+                      const isSelected =
+                        form.serviceName === service.name;
+
+                      const formattedPrice =
+                        new Intl.NumberFormat("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        }).format(service.price);
+
+                      return (
+                        <button
+                          key={service.id}
+                          type="button"
+                          className={`${styles.serviceCard} ${
+                            isSelected
+                              ? styles.serviceCardSelected
+                              : ""
+                          }`}
+                          onClick={() =>
+                            handleServiceSelect(service.name)
+                          }
+                          aria-pressed={isSelected}
+                        >
+                          <span className={styles.serviceIndex}>
+                            {String(index + 1).padStart(2, "0")}
+                          </span>
+
+                          <span className={styles.serviceInfo}>
+                            {service.category && (
+                              <span
+                                className={styles.serviceCategory}
+                              >
+                                {service.category}
+                              </span>
+                            )}
+
+                            <strong>{service.name}</strong>
+
+                            <span className={styles.serviceMeta}>
+                              {service.duration} min
+                            </span>
+                          </span>
+
+                          <span className={styles.servicePrice}>
+                            {formattedPrice}
+                          </span>
+
+                          <span
+                            className={styles.serviceCheck}
+                            aria-hidden="true"
+                          >
+                            <svg
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.8"
+                            >
+                              <path d="m5 12 4.2 4.2L19 6.5" />
+                            </svg>
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 )}
+
                 {errors.serviceName && (
-                  <span id="booking-service-error" className={styles.errorText}>
+                  <span className={styles.errorText}>
                     {errors.serviceName}
                   </span>
                 )}
               </div>
 
-              <div className={styles.fieldRow}>
-                <div className={styles.field}>
-                  <label htmlFor="booking-date" className={styles.label}>
-                    Data preferida
-                  </label>
-                  <input
-                    id="booking-date"
-                    type="date"
-                    className={styles.input}
-                    value={form.date}
-                    onChange={(event) =>
-                      handleChange("date", event.target.value)
-                    }
-                    aria-invalid={errors.date ? true : undefined}
-                    aria-describedby={
-                      errors.date ? "booking-date-error" : undefined
-                    }
-                  />
-                  {errors.date && (
-                    <span id="booking-date-error" className={styles.errorText}>
-                      {errors.date}
-                    </span>
-                  )}
+              <div className={styles.section}>
+                <div className={styles.sectionHeading}>
+                  <span className={styles.sectionNumber}>03</span>
+
+                  <div>
+                    <h4>Data e horário</h4>
+                    <p>Quando você gostaria de ser atendida?</p>
+                  </div>
                 </div>
 
-                <div className={styles.field}>
-                  <label htmlFor="booking-time" className={styles.label}>
-                    Horário preferido
-                  </label>
-                  <select
-                    id="booking-time"
-                    className={styles.select}
-                    value={form.time}
-                    onChange={(event) =>
-                      handleChange("time", event.target.value)
-                    }
-                    aria-invalid={errors.time ? true : undefined}
-                    aria-describedby={
-                      errors.time ? "booking-time-error" : undefined
-                    }
-                  >
-                    <option value="">Selecione um horário</option>
-                    {timeSlots.map((slot) => (
-                      <option key={slot} value={slot}>
-                        {slot}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.time && (
-                    <span id="booking-time-error" className={styles.errorText}>
-                      {errors.time}
+                <div className={styles.fieldGrid}>
+                  <div className={styles.field}>
+                    <label
+                      htmlFor="booking-date"
+                      className={styles.label}
+                    >
+                      Data preferida
+                    </label>
+
+                    <input
+                      id="booking-date"
+                      type="date"
+                      min={getToday()}
+                      className={styles.input}
+                      value={form.date}
+                      onChange={(event) =>
+                        handleChange(
+                          "date",
+                          event.target.value,
+                        )
+                      }
+                      aria-invalid={
+                        errors.date ? true : undefined
+                      }
+                      aria-describedby={
+                        errors.date
+                          ? "booking-date-error"
+                          : undefined
+                      }
+                    />
+
+                    {errors.date && (
+                      <span
+                        id="booking-date-error"
+                        className={styles.errorText}
+                      >
+                        {errors.date}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className={styles.field}>
+                    <span className={styles.label}>
+                      Horário preferido
                     </span>
-                  )}
+
+                    <div
+                      className={styles.timeGrid}
+                      role="group"
+                      aria-label="Horários disponíveis"
+                    >
+                      {timeSlots.map((slot) => {
+                        const isSelected = form.time === slot;
+
+                        return (
+                          <button
+                            key={slot}
+                            type="button"
+                            className={`${styles.timeButton} ${
+                              isSelected
+                                ? styles.timeButtonSelected
+                                : ""
+                            }`}
+                            onClick={() =>
+                              handleChange("time", slot)
+                            }
+                            aria-pressed={isSelected}
+                          >
+                            {slot}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {errors.time && (
+                      <span className={styles.errorText}>
+                        {errors.time}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
 
-              <div className={styles.field}>
-                <label htmlFor="booking-notes" className={styles.label}>
-                  Observações
-                </label>
-                <textarea
-                  id="booking-notes"
-                  className={styles.textarea}
-                  rows={3}
-                  value={form.notes}
-                  onChange={(event) =>
-                    handleChange("notes", event.target.value)
-                  }
-                />
+              <div className={styles.section}>
+                <div className={styles.sectionHeading}>
+                  <span className={styles.sectionNumber}>04</span>
+
+                  <div>
+                    <h4>Alguma observação?</h4>
+                    <p>Conte algo que devemos saber antes do atendimento.</p>
+                  </div>
+                </div>
+
+                <div className={styles.field}>
+                  <label
+                    htmlFor="booking-notes"
+                    className={styles.label}
+                  >
+                    Observações
+                    <span className={styles.optional}>
+                      Opcional
+                    </span>
+                  </label>
+
+                  <textarea
+                    id="booking-notes"
+                    className={styles.textarea}
+                    rows={4}
+                    placeholder="Escreva aqui, se desejar..."
+                    value={form.notes}
+                    onChange={(event) =>
+                      handleChange(
+                        "notes",
+                        event.target.value,
+                      )
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className={styles.summary}>
+                <div className={styles.summaryHeader}>
+                  <span>Resumo</span>
+                  <span className={styles.summaryStatus}>
+                    {selectedService ? "Pronto" : "Pendente"}
+                  </span>
+                </div>
+
+                <div className={styles.summaryContent}>
+                  <div className={styles.summaryService}>
+                    <span className={styles.summaryLabel}>
+                      Serviço
+                    </span>
+
+                    <strong>
+                      {selectedService
+                        ? selectedService.name
+                        : "Selecione um serviço"}
+                    </strong>
+
+                    {selectedService && (
+                      <span>
+                        {selectedService.duration} minutos
+                      </span>
+                    )}
+                  </div>
+
+                  <div className={styles.summaryItem}>
+                    <span>Data</span>
+                    <strong>
+                      {form.date
+                        ? formatDate(form.date)
+                        : "Não selecionada"}
+                    </strong>
+                  </div>
+
+                  <div className={styles.summaryItem}>
+                    <span>Horário</span>
+                    <strong>
+                      {form.time || "Não selecionado"}
+                    </strong>
+                  </div>
+
+                  {selectedServicePrice && (
+                    <div className={styles.summaryPrice}>
+                      <span>Valor</span>
+                      <strong>{selectedServicePrice}</strong>
+                    </div>
+                  )}
+                </div>
               </div>
 
               <button
                 type="submit"
                 className={styles.submitButton}
-                disabled={isSubmitting}
+                disabled={isSubmitting || servicesLoading}
               >
-                {isSubmitting ? "Enviando..." : "Solicitar agendamento"}
+                <span>
+                  {isSubmitting
+                    ? "Enviando solicitação..."
+                    : "Solicitar meu horário"}
+                </span>
+
+                {!isSubmitting && (
+                  <span
+                    className={styles.submitArrow}
+                    aria-hidden="true"
+                  >
+                    →
+                  </span>
+                )}
               </button>
+
+              <p className={styles.formDisclaimer}>
+                Ao enviar sua solicitação, você concorda em receber
+                o contato necessário para confirmação do atendimento.
+              </p>
             </form>
           )}
         </div>
@@ -342,3 +750,4 @@ export function Booking() {
     </section>
   );
 }
+
