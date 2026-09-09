@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Navbar } from "../Navbar/Navbar";
 import { Footer } from "../Footer/Footer";
 import { WhatsAppButton } from "../WhatsAppButton/WhatsAppButton";
-import "./InstitutionalLayout.css";
+import "./Institutionallayout.css";
 
 interface InstitutionalLayoutProps {
   /** Pequeno rótulo acima do título, ex: "Institucional" */
