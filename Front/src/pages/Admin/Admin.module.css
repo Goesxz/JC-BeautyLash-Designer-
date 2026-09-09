@@ -1,0 +1,694 @@
+.page {
+  --primary: #3b5bfe;
+  --primary-dark: #2f47cc;
+  --primary-soft: rgba(59, 91, 254, 0.07);
+  --primary-border: rgba(59, 91, 254, 0.13);
+
+  --background: #eef1f8;
+  --surface: #ffffff;
+
+  --text: #1a1d29;
+  --text-muted: rgba(26, 29, 41, 0.62);
+  --text-soft: rgba(26, 29, 41, 0.48);
+
+  --border: rgba(26, 29, 41, 0.075);
+
+  min-height: 100vh;
+  padding: 2.5rem;
+
+  background:
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(59, 91, 254, 0.055),
+      transparent 28rem
+    ),
+    var(--background);
+
+  color: var(--text);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  max-width: 1180px;
+  margin: 0 auto 2rem;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 2rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  margin-bottom: 0.75rem;
+
+  color: var(--primary);
+
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  line-height: 1;
+
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+
+  width: 22px;
+  height: 2px;
+
+  border-radius: 999px;
+  background: var(--primary);
+}
+
+.hero h1 {
+  margin: 0 0 0.85rem;
+
+  font-size: clamp(2.15rem, 4vw, 3.7rem);
+  font-weight: 850;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.hero p {
+  max-width: 650px;
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+/* =========================
+   AÇÕES DO HERO
+========================= */
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+
+  flex-shrink: 0;
+}
+
+.refreshButton,
+.logoutButton {
+  min-height: 44px;
+  padding: 0.75rem 1.1rem;
+
+  border-radius: 12px;
+
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.refreshButton {
+  border: 1px solid transparent;
+
+  background: var(--primary);
+  color: #fff;
+
+  box-shadow:
+    0 7px 18px rgba(59, 91, 254, 0.18);
+}
+
+.refreshButton:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 24px rgba(59, 91, 254, 0.24);
+}
+
+.logoutButton {
+  border: 1px solid var(--border);
+
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text);
+}
+
+.logoutButton:hover {
+  border-color: rgba(26, 29, 41, 0.14);
+  background: #fff;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(26, 29, 41, 0.07);
+}
+
+.refreshButton:active,
+.logoutButton:active {
+  transform: translateY(0);
+}
+
+.refreshButton:focus-visible,
+.logoutButton:focus-visible,
+.errorBox button:focus-visible {
+  outline: 3px solid rgba(59, 91, 254, 0.22);
+  outline-offset: 3px;
+}
+
+/* =========================
+   MÉTRICAS
+========================= */
+
+.metricsGrid {
+  max-width: 1180px;
+  margin: 0 auto 1.5rem;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.metricCard {
+  position: relative;
+
+  min-width: 0;
+  padding: 1.4rem;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border: 1px solid var(--border);
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 30px rgba(26, 29, 41, 0.045);
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.metricCard::after {
+  content: "";
+
+  position: absolute;
+  top: -45px;
+  right: -45px;
+
+  width: 110px;
+  height: 110px;
+
+  border-radius: 50%;
+
+  background: var(--primary-soft);
+}
+
+.metricCard:hover {
+  transform: translateY(-3px);
+
+  border-color: var(--primary-border);
+
+  box-shadow:
+    0 16px 38px rgba(26, 29, 41, 0.075);
+}
+
+.metricCard span {
+  position: relative;
+  z-index: 1;
+
+  display: block;
+
+  margin-bottom: 0.7rem;
+
+  color: var(--text-soft);
+
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.metricCard strong {
+  position: relative;
+  z-index: 1;
+
+  display: block;
+
+  color: var(--text);
+
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+/* =========================
+   GRID PRINCIPAL
+========================= */
+
+.contentGrid {
+  max-width: 1180px;
+  margin: 0 auto 1.5rem;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.7fr);
+  gap: 1rem;
+}
+
+/* =========================
+   PAINÉIS
+========================= */
+
+.panel,
+.tablePanel {
+  min-width: 0;
+
+  padding: 1.4rem;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border: 1px solid var(--border);
+  border-radius: 22px;
+
+  box-shadow:
+    0 10px 30px rgba(26, 29, 41, 0.045);
+}
+
+.tablePanel {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+  margin-bottom: 1.15rem;
+}
+
+.panelHeader h2 {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: 1.05rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+}
+
+.panelHeader span {
+  color: var(--text-soft);
+
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* =========================
+   LISTAS
+========================= */
+
+.appointmentList,
+.serviceList {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.appointmentCard,
+.serviceItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+  min-width: 0;
+
+  padding: 0.95rem;
+
+  background: #f4f6fb;
+
+  border: 1px solid transparent;
+  border-radius: 15px;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.appointmentCard:hover,
+.serviceItem:hover {
+  background: #fff;
+
+  border-color: var(--primary-border);
+
+  transform: translateY(-1px);
+}
+
+.appointmentCard strong,
+.serviceItem strong {
+  display: block;
+
+  color: var(--text);
+
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.appointmentCard span {
+  display: block;
+
+  margin-top: 0.25rem;
+
+  color: var(--text-soft);
+
+  font-size: 0.78rem;
+}
+
+.appointmentDate {
+  flex-shrink: 0;
+
+  text-align: right;
+}
+
+.appointmentDate strong {
+  color: var(--primary);
+
+  font-size: 0.95rem;
+  font-weight: 850;
+}
+
+/* =========================
+   TABELA
+========================= */
+
+.tableWrapper {
+  width: 100%;
+
+  overflow-x: auto;
+
+  border-radius: 14px;
+}
+
+.table {
+  width: 100%;
+  min-width: 820px;
+
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table th,
+.table td {
+  padding: 0.95rem 1rem;
+
+  text-align: left;
+
+  border-bottom: 1px solid var(--border);
+
+  font-size: 0.86rem;
+}
+
+.table th {
+  color: var(--text-soft);
+
+  background: #f4f6fb;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+}
+
+.table th:first-child {
+  border-radius: 10px 0 0 10px;
+}
+
+.table th:last-child {
+  border-radius: 0 10px 10px 0;
+}
+
+.table td {
+  color: var(--text);
+}
+
+.table tbody tr {
+  transition: background-color 0.18s ease;
+}
+
+.table tbody tr:hover {
+  background: rgba(59, 91, 254, 0.025);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* =========================
+   ESTADOS
+========================= */
+
+.empty,
+.loading {
+  color: var(--text-muted);
+
+  font-size: 0.9rem;
+}
+
+.empty {
+  padding: 1.5rem;
+
+  text-align: center;
+
+  background: #f4f6fb;
+  border-radius: 14px;
+}
+
+.loading {
+  max-width: 1180px;
+  margin: 0 auto;
+
+  padding: 5rem 1rem;
+
+  text-align: center;
+}
+
+/* =========================
+   ERRO
+========================= */
+
+.errorBox {
+  max-width: 520px;
+
+  margin: 6rem auto;
+  padding: 2rem;
+
+  background: #fff;
+
+  border: 1px solid var(--border);
+  border-radius: 22px;
+
+  box-shadow:
+    0 20px 55px rgba(26, 29, 41, 0.08);
+
+  text-align: center;
+}
+
+.errorBox h1 {
+  margin: 0 0 0.75rem;
+
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.errorBox p {
+  margin: 0 0 1.5rem;
+
+  color: var(--text-muted);
+
+  line-height: 1.6;
+}
+
+.errorBox button {
+  border: 0;
+
+  background: var(--primary);
+  color: #fff;
+
+  border-radius: 12px;
+
+  padding: 0.8rem 1.2rem;
+
+  font: inherit;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.errorBox button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1100px) {
+  .page {
+    padding: 2rem 1.5rem;
+  }
+
+  .metricsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+  .page {
+    padding: 1.25rem;
+  }
+
+  .hero {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 1.25rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  .heroActions {
+    width: 100%;
+  }
+
+  .refreshButton,
+  .logoutButton {
+    flex: 1;
+  }
+
+  .metricsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 560px) {
+  .page {
+    padding: 1rem;
+  }
+
+  .hero {
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    margin-bottom: 0.65rem;
+  }
+
+  .heroActions {
+    flex-direction: column;
+  }
+
+  .refreshButton,
+  .logoutButton {
+    width: 100%;
+    flex: none;
+  }
+
+  .metricsGrid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .metricCard {
+    padding: 1.2rem;
+  }
+
+  .panel,
+  .tablePanel {
+    padding: 1rem;
+
+    border-radius: 18px;
+  }
+
+  .panelHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .appointmentCard,
+  .serviceItem {
+    align-items: flex-start;
+  }
+
+  .appointmentDate {
+    text-align: right;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.85rem;
+  }
+}
+
+/* =========================
+   REDUÇÃO DE MOVIMENTO
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .metricCard,
+  .appointmentCard,
+  .serviceItem,
+  .refreshButton,
+  .logoutButton,
+  .errorBox button,
+  .table tbody tr {
+    transition: none;
+  }
+
+  .metricCard:hover,
+  .appointmentCard:hover,
+  .serviceItem:hover,
+  .refreshButton:hover,
+  .logoutButton:hover,
+  .errorBox button:hover {
+    transform: none;
+  }
+}

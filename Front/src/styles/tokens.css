@@ -1,0 +1,109 @@
+/* =========================================================
+   DESIGN TOKENS — Admin (inspirado no dashboard de referência)
+   Este arquivo NÃO mexe em dados/lógica. Apenas define as
+   variáveis visuais que os módulos CSS existentes vão consumir.
+   Importar uma única vez, no ponto de entrada do app (ex: main.tsx
+   ou App.tsx): import "./styles/tokens.css";
+========================================================= */
+
+:root {
+  /* ---------- Cor primária (mantém o azul já usado em
+     Agenda/Admin/Clientes; substitui o rosa #e30b5d usado em
+     Financeiro/Relatorios/Servicos/Configuracoes para unificar) --- */
+  --primary: #3b5bfe;
+  --primary-dark: #2f47cc;
+  --primary-light: #eef1ff;
+  --primary-soft: rgba(59, 91, 254, 0.08);
+  --primary-border: rgba(59, 91, 254, 0.14);
+
+  /* ---------- Sidebar (referência: fundo azul cheio, item ativo
+     em pílula branca) ---------- */
+  --sidebar-bg: var(--primary);
+  --sidebar-bg-hover: var(--primary-dark);
+  --sidebar-text: rgba(255, 255, 255, 0.75);
+  --sidebar-text-active: var(--primary);
+  --sidebar-item-active-bg: #ffffff;
+
+  /* ---------- Superfícies ---------- */
+  --background: #f3f5fb;
+  --surface: #ffffff;
+
+  /* ---------- Texto ---------- */
+  --text: #1a1d29;
+  --text-muted: rgba(26, 29, 41, 0.62);
+  --text-soft: rgba(26, 29, 41, 0.46);
+  --text-on-primary: #ffffff;
+
+  /* ---------- Bordas ---------- */
+  --border: rgba(26, 29, 41, 0.08);
+  --border-strong: rgba(26, 29, 41, 0.14);
+
+  /* ---------- Status (usado nas badges de agendamento/pedido) ---------- */
+  --status-pending-bg: rgba(255, 90, 90, 0.12);
+  --status-pending-text: #e5484d;
+
+  --status-confirmed-bg: rgba(23, 168, 90, 0.12);
+  --status-confirmed-text: #17a85a;
+
+  --status-cancelled-bg: rgba(193, 18, 31, 0.1);
+  --status-cancelled-text: #c1121f;
+
+  --status-finished-bg: rgba(107, 111, 128, 0.12);
+  --status-finished-text: #6b6f80;
+
+  /* ---------- Tipografia ---------- */
+  --font-sans: "Inter", "Poppins", -apple-system, system-ui, sans-serif;
+
+  --text-display: 1.9rem;
+  --text-h1: 1.55rem;
+  --text-h2: 1.05rem;
+  --text-h3: 0.95rem;
+  --text-body: 0.9rem;
+  --text-small: 0.8rem;
+  --text-caption: 0.72rem;
+
+  --weight-regular: 400;
+  --weight-medium: 600;
+  --weight-bold: 800;
+
+  /* ---------- Espaçamento ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+
+  /* ---------- Raio ---------- */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 26px;
+  --radius-full: 999px;
+
+  /* ---------- Sombra (bem suave, como na referência) ---------- */
+  --shadow-xs: 0 1px 2px rgba(26, 29, 41, 0.04);
+  --shadow-sm: 0 6px 16px rgba(26, 29, 41, 0.05);
+  --shadow-md: 0 12px 30px rgba(26, 29, 41, 0.06);
+  --shadow-lg: 0 20px 45px rgba(26, 29, 41, 0.08);
+
+  /* ---------- Transições ---------- */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-base: 220ms;
+}
+
+/* Reset leve + aplicação da fonte base, sem alterar comportamento */
+body {
+  font-family: var(--font-sans);
+  background: var(--background);
+  color: var(--text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

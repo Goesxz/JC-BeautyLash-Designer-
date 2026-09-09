@@ -1,0 +1,325 @@
+.booking {
+  position: relative;
+  padding-block: 120px;
+  background:
+    radial-gradient(
+      circle at 12% 20%,
+      rgba(255, 255, 255, 0.9),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(197, 155, 116, 0.16),
+      transparent 34%
+    ),
+    linear-gradient(135deg, #fffaf6 0%, #f4e3d8 100%);
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 64px;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.intro {
+  position: sticky;
+  top: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 480px;
+}
+
+.eyebrow {
+  margin-bottom: 18px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+}
+
+.headline {
+  margin-bottom: 22px;
+  font-family: var(--font-heading);
+  font-size: clamp(42px, 5vw, 72px);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  font-weight: 400;
+  color: var(--color-text-primary);
+}
+
+.subheadline {
+  max-width: 420px;
+  font-size: 17px;
+  line-height: 1.75;
+  font-weight: 300;
+  color: var(--color-text-secondary);
+}
+
+.card {
+  position: relative;
+  padding: 40px;
+  border-radius: 36px;
+  background: rgba(255, 255, 255, 0.54);
+  border: 1px solid rgba(107, 42, 52, 0.08);
+  box-shadow:
+    0 40px 90px rgba(80, 45, 30, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(34, 30, 27, 0.62);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(107, 42, 52, 0.11);
+  background: rgba(255, 250, 246, 0.82);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.textarea {
+  min-height: 112px;
+  padding: 16px 18px;
+  resize: vertical;
+}
+
+.input:hover,
+.select:hover,
+.textarea:hover {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(107, 42, 52, 0.18);
+}
+
+.input:focus-visible,
+.select:focus-visible,
+.textarea:focus-visible {
+  outline: none;
+  background: #ffffff;
+  border-color: var(--color-primary);
+  box-shadow:
+    0 0 0 4px rgba(107, 42, 52, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transform: translateY(-1px);
+}
+
+.input[aria-invalid="true"],
+.select[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+.errorText {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-error);
+}
+
+.submitButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 56px;
+  margin-top: 6px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: var(--color-text-on-inverse);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 18px 40px rgba(107, 42, 52, 0.22);
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.submitButton:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 24px 48px rgba(107, 42, 52, 0.28);
+}
+
+.submitButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+}
+
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 18px 4px;
+  animation: fadeInUp 0.55s ease both;
+}
+
+.successMark {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  position: relative;
+  box-shadow: 0 16px 34px rgba(107, 42, 52, 0.24);
+}
+
+.successMark::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 7px;
+  border-left: 2px solid var(--color-text-on-inverse);
+  border-bottom: 2px solid var(--color-text-on-inverse);
+  transform: translate(-50%, -62%) rotate(-45deg);
+}
+
+.successTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+  color: var(--color-text-primary);
+}
+
+.successText {
+  max-width: 520px;
+  font-size: 16px;
+  line-height: 1.75;
+  font-weight: 300;
+  color: var(--color-text-secondary);
+}
+
+.successButton {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 4px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .success {
+    animation: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .booking {
+    padding-block: 96px;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    gap: 42px;
+    padding-inline: 32px;
+  }
+
+  .intro {
+    position: static;
+    max-width: 640px;
+  }
+
+  .subheadline {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .booking {
+    padding-block: 72px;
+  }
+
+  .container {
+    padding-inline: 20px;
+    gap: 34px;
+  }
+
+  .headline {
+    font-size: clamp(40px, 12vw, 56px);
+  }
+
+  .subheadline {
+    font-size: 16px;
+  }
+
+  .card {
+    padding: 24px;
+    border-radius: 28px;
+  }
+
+  .fieldRow {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .input,
+  .select,
+  .textarea {
+    border-radius: 16px;
+  }
+}

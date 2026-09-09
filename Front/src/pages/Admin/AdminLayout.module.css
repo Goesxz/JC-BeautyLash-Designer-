@@ -1,0 +1,343 @@
+.layout {
+  --primary: #3b5bfe;
+  --primary-dark: #2f47cc;
+  --primary-soft: rgba(59, 91, 254, 0.08);
+  --primary-border: rgba(59, 91, 254, 0.14);
+
+  --background: #eef1f8;
+  --surface: #ffffff;
+  --text: #1a1d29;
+  --text-muted: rgba(26, 29, 41, 0.62);
+  --border: rgba(26, 29, 41, 0.08);
+
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(59, 91, 254, 0.045),
+      transparent 32rem
+    ),
+    #eef1f8;
+
+  color: var(--text);
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+  position: sticky;
+  top: 0;
+
+  height: 100vh;
+  padding: 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+
+  background: rgba(255, 255, 255, 0.94);
+  border-right: 1px solid var(--primary-border);
+
+  overflow-y: auto;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* =========================
+   BRAND
+========================= */
+
+.brand {
+  position: relative;
+
+  display: grid;
+  gap: 0.35rem;
+
+  padding: 0.75rem 0.5rem 1.5rem;
+  margin-bottom: 1.5rem;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.brand span {
+  color: var(--primary);
+
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  line-height: 1;
+
+  text-transform: uppercase;
+}
+
+.brand strong {
+  color: var(--text);
+
+  font-size: 1.55rem;
+  font-weight: 850;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+/* =========================
+   NAVEGAÇÃO
+========================= */
+
+.nav {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.navLink {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 48px;
+  padding: 0.85rem 1rem;
+
+  border-radius: 14px;
+
+  text-decoration: none;
+  color: var(--text-muted);
+
+  font-size: 0.94rem;
+  font-weight: 700;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.navLink:hover {
+  color: var(--primary);
+  background: var(--primary-soft);
+  transform: translateX(3px);
+}
+
+.navLink:focus-visible {
+  outline: 3px solid rgba(59, 91, 254, 0.22);
+  outline-offset: 2px;
+}
+
+/* Item ativo */
+
+.navLinkActive {
+  color: var(--primary);
+  background: linear-gradient(
+    135deg,
+    rgba(59, 91, 254, 0.11),
+    rgba(59, 91, 254, 0.045)
+  );
+
+  box-shadow:
+    inset 0 0 0 1px rgba(59, 91, 254, 0.08),
+    0 4px 14px rgba(59, 91, 254, 0.06);
+}
+
+.navLinkActive::before {
+  content: "";
+
+  position: absolute;
+  left: -1.5rem;
+
+  width: 4px;
+  height: 22px;
+
+  border-radius: 0 999px 999px 0;
+
+  background: var(--primary);
+}
+
+/* =========================
+   LOGOUT
+========================= */
+
+.logoutButton {
+  margin-top: auto;
+  padding: 0.95rem 1rem;
+
+  border: 1px solid transparent;
+  border-radius: 14px;
+
+  background: var(--text);
+  color: #fff;
+
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 20px rgba(26, 29, 41, 0.12);
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.logoutButton:hover {
+  background: #12172a;
+  transform: translateY(-2px);
+
+  box-shadow: 0 12px 24px rgba(26, 29, 41, 0.16);
+}
+
+.logoutButton:active {
+  transform: translateY(0);
+}
+
+.logoutButton:focus-visible {
+  outline: 3px solid rgba(59, 91, 254, 0.25);
+  outline-offset: 3px;
+}
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.content {
+  min-width: 0;
+  width: 100%;
+
+  overflow-x: hidden;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(26, 29, 41, 0.12);
+  border-radius: 999px;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: 240px minmax(0, 1fr);
+  }
+
+  .sidebar {
+    padding: 1.25rem;
+  }
+
+  .navLinkActive::before {
+    left: -1.25rem;
+  }
+}
+
+/* =========================
+   MOBILE / TABLET PEQUENO
+========================= */
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: relative;
+
+    width: 100%;
+    height: auto;
+    min-height: auto;
+
+    padding: 1rem;
+
+    border-right: 0;
+    border-bottom: 1px solid var(--primary-border);
+
+    overflow: visible;
+  }
+
+  .brand {
+    margin-bottom: 1rem;
+    padding: 0.5rem 0.35rem 1rem;
+  }
+
+  .nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .navLink {
+    min-height: 46px;
+    padding: 0.75rem;
+    justify-content: center;
+
+    font-size: 0.86rem;
+    text-align: center;
+  }
+
+  .navLink:hover {
+    transform: translateY(-2px);
+  }
+
+  .navLinkActive::before {
+    display: none;
+  }
+
+  .logoutButton {
+    margin-top: 1rem;
+  }
+}
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 560px) {
+  .sidebar {
+    padding: 0.85rem;
+  }
+
+  .brand strong {
+    font-size: 1.35rem;
+  }
+
+  .nav {
+    grid-template-columns: 1fr;
+  }
+
+  .navLink {
+    justify-content: flex-start;
+    padding: 0.85rem 1rem;
+    text-align: left;
+  }
+
+  .logoutButton {
+    width: 100%;
+  }
+}
+
+/* Reduz animações para usuários
+   que preferem menos movimento */
+
+@media (prefers-reduced-motion: reduce) {
+  .navLink,
+  .logoutButton {
+    transition: none;
+  }
+
+  .navLink:hover,
+  .logoutButton:hover {
+    transform: none;
+  }
+}

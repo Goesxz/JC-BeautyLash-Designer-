@@ -1,0 +1,227 @@
+.page {
+  min-height: 100vh;
+  padding: 2rem;
+  color: #1a0a10;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  color: #e30b5d;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 0.95;
+}
+
+.header p {
+  margin: 0;
+  color: rgba(26, 10, 16, 0.62);
+}
+
+.header button,
+.form button {
+  border: 0;
+  background: #e30b5d;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.9rem 1rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.metricCard,
+.listPanel,
+.formPanel {
+  background: #fff;
+  border: 1px solid rgba(227, 11, 93, 0.12);
+  border-radius: 28px;
+  box-shadow: 0 18px 50px rgba(26, 10, 16, 0.06);
+}
+
+.metricCard {
+  padding: 1.3rem;
+}
+
+.metricCard span {
+  display: block;
+  color: rgba(26, 10, 16, 0.58);
+  margin-bottom: 0.7rem;
+}
+
+.metricCard strong {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1rem;
+}
+
+.listPanel,
+.formPanel {
+  padding: 1.3rem;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.panelHeader h2 {
+  margin: 0;
+}
+
+.panelHeader span {
+  color: rgba(26, 10, 16, 0.54);
+}
+
+.serviceList {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.serviceCard {
+  display: grid;
+  gap: 0.7rem;
+  background: #f9f1f5;
+  border-radius: 22px;
+  padding: 1rem;
+}
+
+.serviceCardInactive {
+  opacity: 0.55;
+}
+
+.serviceCard > button:first-child {
+  border: 0;
+  background: transparent;
+  color: #1a0a10;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.serviceCard strong,
+.serviceCard span {
+  display: block;
+}
+
+.serviceCard span {
+  color: rgba(26, 10, 16, 0.58);
+  margin-top: 0.25rem;
+}
+
+.toggleButton {
+  border: 1px solid rgba(26, 10, 16, 0.12);
+  background: #fff;
+  color: #1a0a10;
+  border-radius: 999px;
+  padding: 0.75rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.form {
+  display: grid;
+  gap: 1rem;
+}
+
+.form label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.form input {
+  width: 100%;
+  border: 1px solid rgba(26, 10, 16, 0.14);
+  background: #fff;
+  color: #1a0a10;
+  border-radius: 16px;
+  padding: 0.95rem 1rem;
+  font: inherit;
+  outline: none;
+}
+
+.form input:focus {
+  border-color: #e30b5d;
+  box-shadow: 0 0 0 4px rgba(227, 11, 93, 0.1);
+}
+
+.form button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.error {
+  background: rgba(193, 18, 31, 0.08);
+  color: #c1121f;
+  border-radius: 14px;
+  padding: 0.8rem 1rem;
+  margin: 0;
+}
+
+.success {
+  background: rgba(23, 128, 61, 0.1);
+  color: #17803d;
+  border-radius: 14px;
+  padding: 0.8rem 1rem;
+  margin: 0;
+}
+
+.empty,
+.loading {
+  color: rgba(26, 10, 16, 0.62);
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding: 1rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header button {
+    width: 100%;
+  }
+
+  .metricsGrid,
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formPanel {
+    order: -1;
+  }
+}

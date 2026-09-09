@@ -1,0 +1,158 @@
+.page {
+  min-height: 100vh;
+  padding: 2rem;
+  color: #1a0a10;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  color: #e30b5d;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 0.95;
+}
+
+.header p {
+  margin: 0;
+  color: rgba(26, 10, 16, 0.62);
+}
+
+.header button,
+.errorBox button {
+  border: 0;
+  background: #e30b5d;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.9rem 1rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.metricCard,
+.panel {
+  background: #fff;
+  border: 1px solid rgba(227, 11, 93, 0.12);
+  border-radius: 28px;
+  box-shadow: 0 18px 50px rgba(26, 10, 16, 0.06);
+}
+
+.metricCard {
+  padding: 1.3rem;
+}
+
+.metricCard span {
+  display: block;
+  color: rgba(26, 10, 16, 0.58);
+  margin-bottom: 0.7rem;
+}
+
+.metricCard strong {
+  font-size: clamp(1.55rem, 3vw, 2rem);
+}
+
+.panel {
+  padding: 1.3rem;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.panelHeader h2 {
+  margin: 0;
+}
+
+.panelHeader span {
+  color: rgba(26, 10, 16, 0.54);
+}
+
+.rankingList {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.rankingCard {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  background: #f9f1f5;
+  border-radius: 22px;
+  padding: 1rem;
+}
+
+.position {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e30b5d;
+  color: #fff;
+  font-weight: 900;
+}
+
+.rankingCard div span {
+  display: block;
+  color: rgba(26, 10, 16, 0.58);
+  margin-top: 0.25rem;
+}
+
+.empty,
+.loading {
+  color: rgba(26, 10, 16, 0.62);
+}
+
+.errorBox {
+  background: #fff;
+  border-radius: 24px;
+  padding: 2rem;
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding: 1rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header button {
+    width: 100%;
+  }
+
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .rankingCard {
+    grid-template-columns: 1fr;
+  }
+}
