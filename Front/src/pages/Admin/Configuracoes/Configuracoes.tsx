@@ -16,6 +16,7 @@ export default function Configuracoes() {
       setError("");
 
       const data = await getSettings();
+
       setSettings(data);
     } catch (error) {
       setError(
@@ -45,7 +46,10 @@ export default function Configuracoes() {
       <section className={styles.page}>
         <div className={styles.errorBox}>
           <h1>Erro ao carregar configurações</h1>
-          <p>{error || "Não foi possível carregar as configurações."}</p>
+
+          <p>
+            {error || "Não foi possível carregar as configurações."}
+          </p>
 
           <button type="button" onClick={loadSettings}>
             Tentar novamente
@@ -57,13 +61,19 @@ export default function Configuracoes() {
 
   return (
     <section className={styles.page}>
+      {/* =========================
+          HEADER
+      ========================= */}
+
       <header className={styles.header}>
-        <div>
+        <div className={styles.headerContent}>
           <p className={styles.eyebrow}>Configurações</p>
+
           <h1>Preferências do estúdio</h1>
-          <p>
-            Consulte os dados principais do negócio, horários de atendimento e
-            informações usadas no agendamento.
+
+          <p className={styles.headerDescription}>
+            Consulte os dados principais do negócio, horários de atendimento
+            e informações utilizadas no agendamento.
           </p>
         </div>
 
@@ -72,61 +82,123 @@ export default function Configuracoes() {
         </button>
       </header>
 
+      {/* =========================
+          CONTEÚDO
+      ========================= */}
+
       <div className={styles.contentGrid}>
+        {/* =========================
+            DADOS DO NEGÓCIO
+        ========================= */}
+
         <section className={styles.panel}>
           <div className={styles.panelHeader}>
-            <h2>Dados do negócio</h2>
+            <div className={styles.panelTitle}>
+              <div className={styles.panelIcon}>01</div>
+
+              <div>
+                <h2>Dados do negócio</h2>
+                <p>Informações principais do estúdio</p>
+              </div>
+            </div>
           </div>
 
           <div className={styles.infoList}>
-            <div>
-              <span>Nome</span>
-              <strong>{settings.business.name}</strong>
+            <div className={styles.infoItem}>
+              <div className={styles.infoIcon}>N</div>
+
+              <div className={styles.infoContent}>
+                <span>Nome</span>
+                <strong>{settings.business.name}</strong>
+              </div>
             </div>
 
-            <div>
-              <span>Endereço</span>
-              <strong>{settings.business.address}</strong>
+            <div className={styles.infoItem}>
+              <div className={styles.infoIcon}>E</div>
+
+              <div className={styles.infoContent}>
+                <span>Endereço</span>
+                <strong>{settings.business.address}</strong>
+              </div>
             </div>
 
-            <div>
-              <span>WhatsApp</span>
-              <strong>{settings.business.whatsapp}</strong>
+            <div className={styles.infoItem}>
+              <div className={styles.infoIcon}>W</div>
+
+              <div className={styles.infoContent}>
+                <span>WhatsApp</span>
+                <strong>{settings.business.whatsapp}</strong>
+              </div>
             </div>
           </div>
         </section>
 
+        {/* =========================
+            HORÁRIOS
+        ========================= */}
+
         <section className={styles.panel}>
           <div className={styles.panelHeader}>
-            <h2>Horários de atendimento</h2>
+            <div className={styles.panelTitle}>
+              <div className={styles.panelIcon}>02</div>
+
+              <div>
+                <h2>Horários de atendimento</h2>
+                <p>Horários disponíveis para agendamento</p>
+              </div>
+            </div>
           </div>
 
           <div className={styles.tags}>
             {settings.schedule.workingHours.map((hour) => (
-              <span key={hour}>{hour}</span>
+              <span key={hour} className={styles.tag}>
+                {hour}
+              </span>
             ))}
           </div>
         </section>
+
+        {/* =========================
+            DIAS DE FUNCIONAMENTO
+        ========================= */}
 
         <section className={styles.panel}>
           <div className={styles.panelHeader}>
-            <h2>Dias de funcionamento</h2>
+            <div className={styles.panelTitle}>
+              <div className={styles.panelIcon}>03</div>
+
+              <div>
+                <h2>Dias de funcionamento</h2>
+                <p>Dias em que o estúdio recebe clientes</p>
+              </div>
+            </div>
           </div>
 
-          <div className={styles.tags}>
+          <div className={styles.weekDays}>
             {settings.schedule.weekDays.map((day) => (
-              <span key={day}>{day}</span>
+              <div key={day} className={styles.weekDay}>
+                {day}
+              </div>
             ))}
           </div>
         </section>
 
+        {/* =========================
+            PRÓXIMA EVOLUÇÃO
+        ========================= */}
+
         <section className={styles.noticePanel}>
-          <h2>Próxima evolução</h2>
-          <p>
-            Em breve esta tela poderá editar horários, dias de folga, endereço,
-            WhatsApp, PIX, Instagram e regras de agendamento sem mexer no
-            código.
-          </p>
+          <div className={styles.noticeContent}>
+            <div className={styles.noticeIcon}>✦</div>
+
+            <h2>Próxima evolução</h2>
+
+            <p>
+              Em breve esta tela poderá editar horários, dias de folga,
+              endereço, WhatsApp, PIX, Instagram e regras de agendamento
+              diretamente pelo painel, sem precisar alterar o código.
+            </p>
+          </div>
         </section>
       </div>
     </section>

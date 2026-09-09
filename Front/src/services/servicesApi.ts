@@ -10,6 +10,7 @@ export type ApiService = {
 };
 
 export async function getServices(): Promise<ApiService[]> {
-  const data = await apiFetch<{ services: ApiService[] }>("/admin/services");
+  const data = await apiFetch<{ services: ApiService[] }>("/services");
+
   return data.services;
 }

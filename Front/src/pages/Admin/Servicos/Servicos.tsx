@@ -42,7 +42,9 @@ export default function Servicos() {
       setServices(data.services);
     } catch (error) {
       setError(
-        error instanceof Error ? error.message : "Erro ao carregar serviços.",
+        error instanceof Error
+          ? error.message
+          : "Erro ao carregar serviços.",
       );
     } finally {
       setLoading(false);
@@ -53,6 +55,7 @@ export default function Servicos() {
     setSelectedService(service);
     setSuccess("");
     setError("");
+
     setForm({
       name: service.name,
       category: service.category || "",
@@ -100,7 +103,9 @@ export default function Servicos() {
       clearForm();
     } catch (error) {
       setError(
-        error instanceof Error ? error.message : "Erro ao salvar serviço.",
+        error instanceof Error
+          ? error.message
+          : "Erro ao salvar serviço.",
       );
     } finally {
       setSaving(false);
@@ -125,7 +130,9 @@ export default function Servicos() {
       );
     } catch (error) {
       setError(
-        error instanceof Error ? error.message : "Erro ao alterar serviço.",
+        error instanceof Error
+          ? error.message
+          : "Erro ao alterar serviço.",
       );
     }
   }
@@ -152,8 +159,12 @@ export default function Servicos() {
       <header className={styles.header}>
         <div>
           <p className={styles.eyebrow}>Serviços</p>
+
           <h1>Catálogo de serviços</h1>
-          <p>Gerencie procedimentos, preços, duração e disponibilidade.</p>
+
+          <p>
+            Gerencie procedimentos, preços, duração e disponibilidade.
+          </p>
         </div>
 
         <button type="button" onClick={clearForm}>
@@ -164,16 +175,19 @@ export default function Servicos() {
       <section className={styles.metricsGrid}>
         <article className={styles.metricCard}>
           <span>Total de serviços</span>
+
           <strong>{services.length}</strong>
         </article>
 
         <article className={styles.metricCard}>
           <span>Serviços ativos</span>
+
           <strong>{activeServices.length}</strong>
         </article>
 
         <article className={styles.metricCard}>
           <span>Preço médio</span>
+
           <strong>
             {formatCurrency(
               activeServices.length
@@ -191,6 +205,7 @@ export default function Servicos() {
         <section className={styles.listPanel}>
           <div className={styles.panelHeader}>
             <h2>Serviços cadastrados</h2>
+
             <span>{services.length} registros</span>
           </div>
 
@@ -202,14 +217,21 @@ export default function Servicos() {
                   !service.active ? styles.serviceCardInactive : ""
                 }`}
               >
-                <button type="button" onClick={() => selectService(service)}>
+                <button
+                  type="button"
+                  onClick={() => selectService(service)}
+                >
                   <div>
                     <strong>{service.name}</strong>
-                    <span>{service.category || "Sem categoria"}</span>
+
+                    <span>
+                      {service.category || "Sem categoria"}
+                    </span>
                   </div>
 
                   <div>
                     <strong>{formatCurrency(service.price)}</strong>
+
                     <span>{service.duration} min</span>
                   </div>
                 </button>
@@ -225,19 +247,24 @@ export default function Servicos() {
             ))}
 
             {services.length === 0 && (
-              <p className={styles.empty}>Nenhum serviço cadastrado.</p>
+              <p className={styles.empty}>
+                Nenhum serviço cadastrado.
+              </p>
             )}
           </div>
         </section>
 
         <aside className={styles.formPanel}>
           <div className={styles.panelHeader}>
-            <h2>{selectedService ? "Editar serviço" : "Novo serviço"}</h2>
+            <h2>
+              {selectedService ? "Editar serviço" : "Novo serviço"}
+            </h2>
           </div>
 
           <form className={styles.form} onSubmit={handleSubmit}>
             <label>
               Nome do serviço
+
               <input
                 type="text"
                 value={form.name}
@@ -253,6 +280,7 @@ export default function Servicos() {
 
             <label>
               Categoria
+
               <input
                 type="text"
                 value={form.category}
@@ -268,6 +296,7 @@ export default function Servicos() {
 
             <label>
               Preço
+
               <input
                 type="number"
                 value={form.price}
@@ -284,6 +313,7 @@ export default function Servicos() {
 
             <label>
               Duração em minutos
+
               <input
                 type="number"
                 value={form.duration}
@@ -298,8 +328,17 @@ export default function Servicos() {
               />
             </label>
 
-            {error && <p className={styles.error}>{error}</p>}
-            {success && <p className={styles.success}>{success}</p>}
+            {error && (
+              <p className={styles.error}>
+                {error}
+              </p>
+            )}
+
+            {success && (
+              <p className={styles.success}>
+                {success}
+              </p>
+            )}
 
             <button type="submit" disabled={saving}>
               {saving

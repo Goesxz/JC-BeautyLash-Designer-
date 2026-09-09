@@ -1,116 +1,285 @@
 .button {
   position: fixed;
-  right: 32px;
-  bottom: 32px;
-  z-index: 100;
+  right: 28px;
+  bottom: 28px;
+  z-index: 1000;
 
   display: inline-flex;
   align-items: center;
-  gap: 14px;
+  gap: 13px;
 
-  height: 62px;
-  padding: 0 24px 0 10px;
+  min-width: 218px;
+  height: 68px;
+  padding: 7px 18px 7px 8px;
 
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 999px;
 
-  background: rgba(107, 42, 52, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(107, 42, 52, 0.98),
+      rgba(82, 30, 39, 0.98)
+    );
 
   color: #fff;
+  text-decoration: none;
 
   box-shadow:
-    0 20px 50px rgba(107, 42, 52, 0.28),
-    0 0 0 1px rgba(255, 255, 255, 0.06);
+    0 18px 45px rgba(58, 24, 30, 0.26),
+    0 6px 18px rgba(58, 24, 30, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 
   transition:
-    transform 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
     box-shadow 0.35s ease,
-    background 0.35s ease;
+    background 0.35s ease,
+    border-color 0.35s ease;
 
-  animation: enter 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation: enter 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.button::before {
+  content: "";
+
+  position: absolute;
+  inset: 1px;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.1),
+      transparent 38%,
+      transparent 70%,
+      rgba(255, 255, 255, 0.04)
+    );
+
+  pointer-events: none;
 }
 
 .button:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
 
-  background: #7a3340;
+  border-color: rgba(255, 255, 255, 0.22);
+
+  background:
+    linear-gradient(
+      135deg,
+      #7a3340,
+      #672a35
+    );
 
   box-shadow:
-    0 28px 60px rgba(107, 42, 52, 0.34),
-    0 0 30px rgba(197, 155, 116, 0.18);
+    0 25px 58px rgba(58, 24, 30, 0.32),
+    0 8px 25px rgba(58, 24, 30, 0.16),
+    0 0 35px rgba(197, 155, 116, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
 .button:active {
-  transform: translateY(-1px);
+  transform: translateY(-1px) scale(0.98);
 }
 
-.icon {
+.button:focus-visible {
+  outline: 3px solid rgba(197, 155, 116, 0.5);
+  outline-offset: 4px;
+}
+
+
+/* ================================
+   ÍCONE
+================================ */
+
+.iconWrapper {
   position: relative;
-
-  width: 46px;
-  height: 46px;
-
-  flex-shrink: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
+  width: 52px;
+  height: 52px;
+
+  flex-shrink: 0;
+
   border-radius: 50%;
 
-  background: rgba(255, 255, 255, 0.12);
+  background: #25d366;
 
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 7px 18px rgba(37, 211, 102, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
 
-  overflow: hidden;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-.icon::before {
-  content: "";
+.button:hover .iconWrapper {
+  transform: scale(1.06) rotate(-3deg);
 
-  position: absolute;
-  inset: 0;
+  box-shadow:
+    0 9px 24px rgba(37, 211, 102, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
 
-  background: radial-gradient(
-    circle at 30% 30%,
-    rgba(255, 255, 255, 0.25),
-    transparent 70%
-  );
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
 }
 
 .icon svg {
-  width: 22px;
-  height: 22px;
+  width: 27px;
+  height: 27px;
+
+  display: block;
+}
+
+
+/* ================================
+   INDICADOR ONLINE
+================================ */
+
+.statusDot {
+  position: absolute;
+
+  right: 0;
+  bottom: 1px;
+
+  width: 12px;
+  height: 12px;
+
+  border: 2px solid #702e3a;
+  border-radius: 50%;
+
+  background: #7cff9b;
+
+  box-shadow:
+    0 0 0 2px rgba(124, 255, 155, 0.08);
+
+  animation: statusPulse 2.8s ease-in-out infinite;
+}
+
+
+/* ================================
+   TEXTO
+================================ */
+
+.content {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  min-width: 0;
+}
+
+.label {
+  margin-bottom: 3px;
+
+  font-size: 9px;
+  line-height: 1;
+
+  font-weight: 700;
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .text {
-  font-size: 13px;
+  font-size: 14px;
+  line-height: 1.2;
+
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
+
+  color: #fff;
+
   white-space: nowrap;
 }
 
+
+/* ================================
+   SETA
+================================ */
+
+.arrow {
+  position: relative;
+
+  margin-left: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  color: rgba(255, 255, 255, 0.8);
+
+  font-size: 17px;
+  line-height: 1;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.button:hover .arrow {
+  transform: translateX(3px);
+
+  background: rgba(255, 255, 255, 0.14);
+
+  color: #fff;
+}
+
+
+/* ================================
+   PULSE
+================================ */
+
 .pulseRing {
   position: absolute;
-  inset: -5px;
+
+  inset: -6px;
+
+  border: 1px solid rgba(37, 211, 102, 0.38);
 
   border-radius: 999px;
 
-  border: 1px solid rgba(197, 155, 116, 0.35);
-
-  animation: pulse 2.6s infinite;
-
   pointer-events: none;
+
+  animation: pulse 3s ease-out infinite;
 }
+
+
+/* ================================
+   ANIMAÇÕES
+================================ */
 
 @keyframes enter {
   from {
     opacity: 0;
-    transform: translateY(18px) scale(0.94);
+    transform: translateY(22px) scale(0.92);
   }
 
   to {
@@ -121,64 +290,139 @@
 
 @keyframes pulse {
   0% {
-    opacity: 0.55;
-    transform: scale(1);
+    opacity: 0.5;
+    transform: scale(0.98);
   }
 
-  70% {
+  65% {
     opacity: 0;
-    transform: scale(1.18);
+    transform: scale(1.13);
   }
 
   100% {
     opacity: 0;
-    transform: scale(1.18);
+    transform: scale(1.13);
   }
 }
+
+@keyframes statusPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.65;
+    transform: scale(0.82);
+  }
+}
+
+
+/* ================================
+   ACESSIBILIDADE
+================================ */
 
 @media (prefers-reduced-motion: reduce) {
   .button {
     animation: none;
   }
 
-  .pulseRing {
-    display: none;
+  .pulseRing,
+  .statusDot {
+    animation: none;
   }
 }
 
+
+/* ================================
+   TABLET / MOBILE
+================================ */
+
 @media (max-width: 768px) {
   .button {
-    width: 64px;
-    height: 64px;
+    right: 20px;
+    bottom: 20px;
+
+    width: 62px;
+    min-width: 62px;
+    height: 62px;
 
     padding: 0;
 
     justify-content: center;
 
     border-radius: 50%;
-
-    right: 20px;
-    bottom: 20px;
   }
 
-  .text {
+  .iconWrapper {
+    width: 62px;
+    height: 62px;
+
+    background: #25d366;
+
+    box-shadow:
+      0 12px 28px rgba(37, 211, 102, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+
+  .icon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .content,
+  .arrow {
     display: none;
   }
 
-  .icon {
-    width: 64px;
-    height: 64px;
+  .statusDot {
+    right: 1px;
+    bottom: 1px;
 
-    background: transparent;
-    border: none;
+    width: 13px;
+    height: 13px;
+
+    border-color: #702e3a;
+  }
+
+  .pulseRing {
+    inset: -5px;
+  }
+
+  .button:hover {
+    transform: translateY(-4px) scale(1.03);
+  }
+
+  .button:active {
+    transform: translateY(-1px) scale(0.96);
+  }
+}
+
+
+/* ================================
+   TELAS MUITO PEQUENAS
+================================ */
+
+@media (max-width: 380px) {
+  .button {
+    right: 16px;
+    bottom: 16px;
+
+    width: 58px;
+    min-width: 58px;
+    height: 58px;
+  }
+
+  .iconWrapper {
+    width: 58px;
+    height: 58px;
   }
 
   .icon svg {
     width: 28px;
     height: 28px;
   }
-
-  .pulseRing {
-    border-radius: 50%;
-  }
 }
+
+

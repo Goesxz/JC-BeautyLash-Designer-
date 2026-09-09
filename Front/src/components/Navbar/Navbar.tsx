@@ -12,20 +12,21 @@ const navLinks: NavLink[] = [
   { label: "Serviços", href: "#servicos" },
   { label: "Resultados", href: "#resultados" },
   { label: "Agendamento", href: "#agendamento" },
-  { label: "Instagram", href: "https://www.instagram.com/__studiojcbeauty/" },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/__studiojcbeauty/",
+  },
 ];
 
 const quickNavLinks: NavLink[] = [
   { label: "Início", href: "#inicio" },
   { label: "Serviços", href: "#servicos" },
   { label: "Resultados", href: "#resultados" },
+  { label: "Agendamento", href: "#agendamento" },
 ];
 
 const professionalAreaHref = "/admin/login";
 
-// Links que começam com "http" são externos (ex: Instagram) e continuam
-// como <a>. Links de âncora (#inicio, #servicos...) viram <Link to="/#...">
-// para funcionarem a partir de qualquer rota do site, não só da Home.
 function isExternalLink(href: string) {
   return href.startsWith("http");
 }
@@ -42,12 +43,23 @@ export function Navbar() {
     function handleScroll() {
       setIsScrolled(window.scrollY > 80);
     }
+
+    handleScroll();
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
     return () => {
       document.body.style.overflow = "";
     };
@@ -57,13 +69,23 @@ export function Navbar() {
     setIsMenuOpen(false);
   }
 
+  function handleMenuToggle() {
+    setIsMenuOpen((current) => !current);
+  }
+
   return (
-    <header className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
+    <header
+      className={`${styles.navbar} ${
+        isScrolled ? styles.scrolled : ""
+      }`}
+    >
       <div className={styles.container}>
+        {/* LOGO */}
         <Link
           to="/#inicio"
           className={styles.logo}
           aria-label="JC Beauty - Voltar ao início"
+          onClick={closeMenu}
         >
           <img
             src="https://res.cloudinary.com/djpdnyvpv/image/upload/v1783117499/WhatsApp_Image_2026-06-18_at_16.53.35-removebg-preview_odbyfv.png"
@@ -72,7 +94,11 @@ export function Navbar() {
           />
         </Link>
 
-        <nav className={styles.desktopNav} aria-label="Navegação principal">
+        {/* DESKTOP NAVIGATION */}
+        <nav
+          className={styles.desktopNav}
+          aria-label="Navegação principal"
+        >
           <ul className={styles.linkList}>
             {navLinks.map((link) =>
               isExternalLink(link.href) ? (
@@ -88,7 +114,10 @@ export function Navbar() {
                 </li>
               ) : (
                 <li key={link.href}>
-                  <Link to={toHomeAnchor(link.href)} className={styles.link}>
+                  <Link
+                    to={toHomeAnchor(link.href)}
+                    className={styles.link}
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -97,38 +126,66 @@ export function Navbar() {
           </ul>
         </nav>
 
+        {/* DESKTOP ACTIONS */}
         <div className={styles.actions}>
-          <Link to={professionalAreaHref} className={styles.professionalLink}>
+          <Link
+            to={professionalAreaHref}
+            className={styles.professionalLink}
+          >
             Área Profissional
           </Link>
 
-          <Link to="/#agendamento" className={styles.ctaButton}>
+          <Link
+            to="/#agendamento"
+            className={styles.ctaButton}
+          >
             Agendar horário
           </Link>
         </div>
 
+        {/* MOBILE MENU BUTTON */}
         <button
           type="button"
           className={styles.menuToggle}
-          onClick={() => setIsMenuOpen(true)}
-          aria-label="Abrir menu"
+          onClick={handleMenuToggle}
+          aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-navigation"
         >
-          <span className={styles.menuIcon} />
+          <span className={styles.menuIcon}>
+            <span />
+          </span>
         </button>
       </div>
 
+      {/* =====================================================
+          MOBILE MENU
+          ===================================================== */}
+
       <div
-        className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuOpen : ""}`}
+        id="mobile-navigation"
+        className={`${styles.mobileMenu} ${
+          isMenuOpen ? styles.mobileMenuOpen : ""
+        }`}
+        aria-hidden={!isMenuOpen}
       >
+        {/* MOBILE HEADER */}
         <div className={styles.mobileMenuHeader}>
-          <div className={styles.mobileMenuTitleGroup}>
+          <Link
+            to="/#inicio"
+            className={styles.mobileMenuTitleGroup}
+            onClick={closeMenu}
+          >
             <img
               src="https://res.cloudinary.com/djpdnyvpv/image/upload/v1783117499/WhatsApp_Image_2026-06-18_at_16.53.35-removebg-preview_odbyfv.png"
               alt="JC Beauty"
               className={styles.mobileLogo}
             />
-            <span className={styles.mobileMenuTitle}>Menu</span>
-          </div>
+
+            <span className={styles.mobileMenuTitle}>
+              Menu
+            </span>
+          </Link>
 
           <button
             type="button"
@@ -140,7 +197,9 @@ export function Navbar() {
           </button>
         </div>
 
+        {/* MOBILE BODY */}
         <div className={styles.mobileMenuBody}>
+          {/* DESTAQUES */}
           <div className={styles.highlightCards}>
             <Link
               to="/#agendamento"
@@ -162,13 +221,20 @@ export function Navbar() {
                     stroke="currentColor"
                     strokeWidth="1.6"
                   />
-                  <path d="M3 9.5H21" stroke="currentColor" strokeWidth="1.6" />
+
+                  <path
+                    d="M3 9.5H21"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                  />
+
                   <path
                     d="M8 3V6.5"
                     stroke="currentColor"
                     strokeWidth="1.6"
                     strokeLinecap="round"
                   />
+
                   <path
                     d="M16 3V6.5"
                     stroke="currentColor"
@@ -177,8 +243,12 @@ export function Navbar() {
                   />
                 </svg>
               </span>
+
               <span className={styles.cardText}>
-                <span className={styles.cardTitle}>Agendar Horário</span>
+                <span className={styles.cardTitle}>
+                  Agendar Horário
+                </span>
+
                 <span className={styles.cardSubtitle}>
                   Marque seu atendimento agora
                 </span>
@@ -202,6 +272,7 @@ export function Navbar() {
                     strokeWidth="1.6"
                     strokeLinecap="round"
                   />
+
                   <path
                     d="M10 17L15 12L10 7"
                     stroke="currentColor"
@@ -209,6 +280,7 @@ export function Navbar() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
+
                   <path
                     d="M15 12H4"
                     stroke="currentColor"
@@ -217,8 +289,12 @@ export function Navbar() {
                   />
                 </svg>
               </span>
+
               <span className={styles.cardText}>
-                <span className={styles.cardTitle}>Área Profissional</span>
+                <span className={styles.cardTitle}>
+                  Área Profissional
+                </span>
+
                 <span className={styles.cardSubtitle}>
                   Acesso administrativo
                 </span>
@@ -228,8 +304,12 @@ export function Navbar() {
 
           <span className={styles.sectionDivider} />
 
+          {/* NAVEGAÇÃO */}
           <nav aria-label="Navegação rápida">
-            <span className={styles.sectionLabel}>Navegação Rápida</span>
+            <span className={styles.sectionLabel}>
+              Navegação Rápida
+            </span>
+
             <ul className={styles.mobileLinkList}>
               {quickNavLinks.map((link) => (
                 <li key={link.href}>
@@ -238,7 +318,7 @@ export function Navbar() {
                     className={styles.mobileLink}
                     onClick={closeMenu}
                   >
-                    {link.label}
+                    <span>{link.label}</span>
                   </Link>
                 </li>
               ))}
@@ -247,8 +327,12 @@ export function Navbar() {
 
           <span className={styles.sectionDivider} />
 
+          {/* INSTAGRAM */}
           <div className={styles.followSection}>
-            <span className={styles.sectionLabel}>Siga-nos</span>
+            <span className={styles.sectionLabel}>
+              Siga-nos
+            </span>
+
             <div className={styles.socialRow}>
               <a
                 href="https://www.instagram.com/__studiojcbeauty/"
@@ -271,6 +355,7 @@ export function Navbar() {
                     stroke="currentColor"
                     strokeWidth="1.6"
                   />
+
                   <circle
                     cx="12"
                     cy="12"
@@ -278,7 +363,13 @@ export function Navbar() {
                     stroke="currentColor"
                     strokeWidth="1.6"
                   />
-                  <circle cx="17.2" cy="6.8" r="1" fill="currentColor" />
+
+                  <circle
+                    cx="17.2"
+                    cy="6.8"
+                    r="1"
+                    fill="currentColor"
+                  />
                 </svg>
               </a>
             </div>

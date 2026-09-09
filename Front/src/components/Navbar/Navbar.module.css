@@ -1,16 +1,27 @@
+/* =========================================================
+   JC BEAUTY — NAVBAR
+   Desktop / Tablet / Mobile
+   ========================================================= */
+
 .navbar {
   position: fixed;
-  inset: 0 0 auto;
-  z-index: 100;
+  inset: 0 0 auto 0;
+
+  width: 100%;
   height: 84px;
+
+  z-index: 9999;
+
   background: linear-gradient(
     180deg,
-    rgba(255, 250, 246, 0.94) 0%,
-    rgba(255, 250, 246, 0.76) 72%,
+    rgba(255, 250, 246, 0.97) 0%,
+    rgba(255, 250, 246, 0.84) 72%,
     rgba(255, 250, 246, 0) 100%
   );
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
   transition:
     height 0.35s ease,
     background 0.35s ease,
@@ -19,122 +30,201 @@
 
 .scrolled {
   height: 72px;
-  background: rgba(255, 250, 246, 0.9);
-  box-shadow: 0 18px 50px rgba(80, 45, 30, 0.08);
+
+  background: rgba(255, 250, 246, 0.95);
+
+  box-shadow:
+    0 12px 40px rgba(80, 45, 30, 0.08),
+    0 1px 0 rgba(107, 42, 52, 0.05);
 }
 
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
 .container {
-  height: 100%;
+  width: 100%;
   max-width: 1440px;
-  margin-inline: auto;
-  padding-inline: 64px;
+  height: 100%;
+
+  margin: 0 auto;
+  padding: 0 64px;
+
+  box-sizing: border-box;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 32px;
 }
+
+/* =========================================================
+   LOGO
+   ========================================================= */
 
 .logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+
+  width: auto;
   height: 64px;
+
+  flex-shrink: 0;
+
+  text-decoration: none;
 }
 
 .logoImage {
   display: block;
+
   width: 100px;
   height: 100px;
+
   object-fit: contain;
-  filter: drop-shadow(0 8px 18px rgba(80, 45, 30, 0.08));
+
+  filter: drop-shadow(
+    0 8px 18px rgba(80, 45, 30, 0.08)
+  );
+
   transition:
-    transform 0.35s ease,
-    height 0.35s ease;
+    width 0.35s ease,
+    height 0.35s ease,
+    transform 0.35s ease;
 }
 
 .logo:hover .logoImage {
-  transform: translateY(-1px) scale(1.02);
+  transform: scale(1.02);
 }
 
 .scrolled .logoImage {
+  width: 85px;
   height: 85px;
 }
 
+/* =========================================================
+   DESKTOP NAV
+   ========================================================= */
+
 .desktopNav {
   flex: 1;
+
+  min-width: 0;
+
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
 .linkList {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px;
+
+  margin: 0;
+  padding: 7px;
+
+  gap: 6px;
+
+  list-style: none;
+
   border: 1px solid rgba(107, 42, 52, 0.08);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.42);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+
+  background: rgba(255, 255, 255, 0.48);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 8px 30px rgba(80, 45, 30, 0.03);
 }
 
 .link {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+
   height: 36px;
-  padding-inline: 16px;
+
+  padding: 0 15px;
+
   border-radius: 999px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+
   color: rgba(34, 30, 27, 0.68);
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+  text-decoration: none;
+
+  white-space: nowrap;
+
   transition:
-    background 0.3s ease,
-    color 0.3s ease,
-    transform 0.3s ease;
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
 }
 
 .link:hover {
   background: rgba(107, 42, 52, 0.07);
-  color: var(--color-text-primary);
+
+  color: #6b2a34;
+
   transform: translateY(-1px);
 }
 
-.link::after {
-  display: none;
-}
+/* =========================================================
+   DESKTOP ACTIONS
+   ========================================================= */
 
 .actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+
+  gap: 10px;
+
   flex-shrink: 0;
 }
 
 .professionalLink {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+
   height: 40px;
-  padding-inline: 18px;
-  border-radius: 999px;
+
+  padding: 0 17px;
+
   border: 1px solid rgba(107, 42, 52, 0.2);
-  background: transparent;
-  color: var(--color-text-primary);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.2);
+
+  color: #221e1b;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+
   text-transform: uppercase;
+  text-decoration: none;
   white-space: nowrap;
+
   transition:
-    background 0.3s ease,
-    border-color 0.3s ease,
-    transform 0.3s ease;
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
 }
 
 .professionalLink:hover {
   background: rgba(107, 42, 52, 0.06);
+
   border-color: rgba(107, 42, 52, 0.35);
+
+  color: #6b2a34;
+
   transform: translateY(-1px);
 }
 
@@ -142,146 +232,319 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   min-height: 44px;
-  padding: 0 22px;
-  border-radius: 999px;
+
+  padding: 0 21px;
+
   border: 1px solid rgba(107, 42, 52, 0.18);
-  background: var(--color-primary);
-  color: var(--color-text-on-inverse);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  border-radius: 999px;
+
+  background: #6b2a34;
+  color: #fffaf6;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+
   text-transform: uppercase;
+  text-decoration: none;
   white-space: nowrap;
-  box-shadow: 0 16px 36px rgba(107, 42, 52, 0.2);
+
+  box-shadow:
+    0 12px 30px rgba(107, 42, 52, 0.18);
+
   transition:
-    transform 0.3s ease,
-    background 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .ctaButton:hover {
   transform: translateY(-2px);
-  background: var(--color-primary-hover);
-  box-shadow: 0 20px 44px rgba(107, 42, 52, 0.26);
+
+  background: #54212a;
+
+  box-shadow:
+    0 18px 38px rgba(107, 42, 52, 0.24);
 }
+
+/* =========================================================
+   HAMBURGER
+   ========================================================= */
 
 .menuToggle {
   display: none;
+
   width: 44px;
   height: 44px;
+
+  padding: 0;
+
   align-items: center;
   justify-content: center;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.48);
-  border: 1px solid rgba(107, 42, 52, 0.1);
+
+  border: 1px solid rgba(107, 42, 52, 0.12);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.62);
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
 }
 
-.menuIcon,
-.menuIcon::before,
-.menuIcon::after {
-  content: "";
-  display: block;
-  width: 22px;
-  height: 1.5px;
-  background-color: var(--color-text-primary);
+.menuToggle:hover {
+  background: rgba(255, 255, 255, 0.9);
+
+  border-color: rgba(107, 42, 52, 0.25);
+}
+
+.menuToggle:active {
+  transform: scale(0.94);
+}
+
+.menuIcon {
   position: relative;
+
+  display: block;
+
+  width: 21px;
+  height: 16px;
+}
+
+.menuIcon::before,
+.menuIcon::after,
+.menuIcon span {
+  content: "";
+
+  position: absolute;
+  left: 0;
+
+  width: 21px;
+  height: 1.5px;
+
+  background: #221e1b;
+
+  border-radius: 999px;
 }
 
 .menuIcon::before {
-  position: absolute;
-  top: -6px;
+  top: 1px;
+}
+
+.menuIcon span {
+  top: 7px;
 }
 
 .menuIcon::after {
-  position: absolute;
-  top: 6px;
+  top: 13px;
 }
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
 
 .mobileMenu {
   position: fixed;
+
   inset: 0;
-  z-index: 200;
+
+  width: 100%;
+  height: 100dvh;
+
+  box-sizing: border-box;
+
+  z-index: 10000;
+
   display: flex;
   flex-direction: column;
-  padding: 24px 20px 32px;
+
+  padding:
+    max(18px, env(safe-area-inset-top))
+    20px
+    max(24px, env(safe-area-inset-bottom));
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+
   background:
     radial-gradient(
-      circle at top right,
-      rgba(197, 155, 116, 0.18),
+      circle at 100% 0%,
+      rgba(197, 155, 116, 0.2),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(107, 42, 52, 0.08),
       transparent 34%
     ),
-    linear-gradient(135deg, #fffaf6 0%, #f4e3d8 100%);
+    linear-gradient(
+      135deg,
+      #fffaf6 0%,
+      #f8eee8 52%,
+      #f2dfd4 100%
+    );
+
   opacity: 0;
+
   visibility: hidden;
-  transform: translateY(-8px);
+
+  pointer-events: none;
+
+  transform: translateY(-12px);
+
   transition:
-    opacity 0.45s ease,
-    transform 0.45s ease,
-    visibility 0.45s ease;
-  overflow-y: auto;
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    visibility 0s linear 0.3s;
 }
 
 .mobileMenuOpen {
   opacity: 1;
+
   visibility: visible;
+
+  pointer-events: auto;
+
   transform: translateY(0);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    visibility 0s linear 0s;
 }
 
+/* =========================================================
+   MOBILE HEADER
+   ========================================================= */
+
 .mobileMenuHeader {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+  min-height: 48px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   flex-shrink: 0;
 }
 
 .mobileMenuTitleGroup {
   display: flex;
   align-items: center;
-  gap: 12px;
-}
 
-.mobileMenuTitle {
-  font-family: var(--font-heading);
-  font-size: 22px;
-  color: var(--color-text-primary);
+  gap: 11px;
+
+  color: #221e1b;
+
+  text-decoration: none;
 }
 
 .mobileLogo {
   display: block;
+
   width: auto;
-  height: 40px;
+  height: 42px;
+
   object-fit: contain;
-  filter: drop-shadow(0 8px 18px rgba(80, 45, 30, 0.08));
+
+  filter:
+    drop-shadow(
+      0 6px 14px rgba(80, 45, 30, 0.08)
+    );
 }
 
+.mobileMenuTitle {
+  color: #221e1b;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 21px;
+
+  line-height: 1;
+
+  letter-spacing: -0.02em;
+}
+
+/* =========================================================
+   CLOSE
+   ========================================================= */
+
 .closeButton {
+  position: relative;
+
+  z-index: 3;
+
   width: 44px;
   height: 44px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(107, 42, 52, 0.1);
+
+  padding: 0;
+
+  border: 1px solid rgba(107, 42, 52, 0.12);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.62);
+
+  cursor: pointer;
+
   flex-shrink: 0;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.closeButton:active {
+  transform: scale(0.94);
 }
 
 .closeIcon {
   position: relative;
-  width: 20px;
-  height: 20px;
+
+  display: block;
+
+  width: 19px;
+  height: 19px;
 }
 
 .closeIcon::before,
 .closeIcon::after {
   content: "";
+
   position: absolute;
+
   top: 50%;
   left: 0;
+
   width: 100%;
   height: 1.5px;
-  background-color: var(--color-text-primary);
+
+  border-radius: 999px;
+
+  background: #221e1b;
 }
 
 .closeIcon::before {
@@ -292,30 +555,69 @@
   transform: rotate(-45deg);
 }
 
+/* =========================================================
+   MOBILE BODY
+   ========================================================= */
+
 .mobileMenuBody {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  box-sizing: border-box;
+
   flex: 1;
+
   display: flex;
   flex-direction: column;
-  gap: 24px;
+
+  gap: 22px;
+
   padding-top: 28px;
+
+  min-height: min-content;
 }
+
+/* =========================================================
+   HIGHLIGHT CARDS
+   ========================================================= */
 
 .highlightCards {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+
+  gap: 12px;
+
+  width: 100%;
 }
 
 .primaryCard,
 .secondaryCard {
+  position: relative;
+
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 18px 20px;
-  border-radius: 24px;
+
+  width: 100%;
+  min-height: 78px;
+
+  box-sizing: border-box;
+
+  padding: 16px 18px;
+
+  gap: 15px;
+
+  border-radius: 22px;
+
+  text-decoration: none;
+
+  overflow: hidden;
+
   transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .primaryCard:hover,
@@ -323,119 +625,270 @@
   transform: translateY(-2px);
 }
 
+.primaryCard::after,
+.secondaryCard::after {
+  content: "→";
+
+  position: absolute;
+
+  right: 18px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  font-size: 18px;
+
+  opacity: 0.62;
+
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.primaryCard:hover::after,
+.secondaryCard:hover::after {
+  transform: translate(4px, -50%);
+
+  opacity: 1;
+}
+
 .primaryCard {
-  background: linear-gradient(
-    135deg,
-    var(--color-primary) 0%,
-    var(--color-primary-hover) 100%
-  );
-  box-shadow: 0 16px 36px rgba(107, 42, 52, 0.24);
-  color: var(--color-text-on-inverse);
+  background:
+    linear-gradient(
+      135deg,
+      #6b2a34 0%,
+      #81404a 100%
+    );
+
+  color: #fffaf6;
+
+  box-shadow:
+    0 16px 34px rgba(107, 42, 52, 0.22);
 }
 
 .secondaryCard {
-  background: var(--color-text-primary);
-  color: var(--color-text-on-inverse);
-  box-shadow: 0 16px 36px rgba(34, 30, 27, 0.16);
+  background: #221e1b;
+
+  color: #fffaf6;
+
+  box-shadow:
+    0 16px 34px rgba(34, 30, 27, 0.15);
 }
+
+/* =========================================================
+   CARD ICON
+   ========================================================= */
 
 .cardIcon {
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 44px;
   height: 44px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.18);
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.14);
+
   flex-shrink: 0;
 }
 
 .cardIcon svg {
-  width: 22px;
-  height: 22px;
+  width: 21px;
+  height: 21px;
 }
+
+/* =========================================================
+   CARD TEXT
+   ========================================================= */
 
 .cardText {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+
+  gap: 3px;
+
+  padding-right: 28px;
 }
 
 .cardTitle {
-  font-family: var(--font-heading);
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: 17px;
-  line-height: 1.2;
+
+  line-height: 1.15;
 }
 
 .cardSubtitle {
-  font-size: 12px;
-  opacity: 0.8;
+  font-size: 11px;
+
+  line-height: 1.4;
+
+  opacity: 0.72;
 }
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
 
 .sectionDivider {
   display: block;
-  height: 1px;
+
   width: 100%;
-  background: rgba(107, 42, 52, 0.12);
+  height: 1px;
+
+  background: rgba(107, 42, 52, 0.11);
+
+  flex-shrink: 0;
 }
+
+/* =========================================================
+   SECTION LABEL
+   ========================================================= */
 
 .sectionLabel {
   display: block;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+
+  margin-bottom: 10px;
+
+  color: rgba(34, 30, 27, 0.48);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+
   text-transform: uppercase;
-  color: rgba(34, 30, 27, 0.5);
-  margin-bottom: 14px;
 }
+
+/* =========================================================
+   MOBILE LINKS
+   ========================================================= */
 
 .mobileLinkList {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
 }
 
 .mobileLink {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 4px;
-  font-family: var(--font-heading);
-  font-size: 22px;
-  color: var(--color-text-primary);
+
+  width: 100%;
+  min-height: 55px;
+
+  box-sizing: border-box;
+
+  padding: 12px 3px;
+
   border-bottom: 1px solid rgba(107, 42, 52, 0.08);
+
+  color: #221e1b;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 21px;
+
+  line-height: 1.2;
+
+  text-decoration: none;
+
+  transition:
+    color 0.25s ease,
+    padding-left 0.25s ease;
+}
+
+.mobileLink::after {
+  content: "↗";
+
+  color: #8a5a60;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 15px;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.mobileLink:hover {
+  padding-left: 7px;
+
+  color: #6b2a34;
+}
+
+.mobileLink:hover::after {
+  color: #6b2a34;
+
+  transform: translate(3px, -2px);
 }
 
 .mobileLinkList li:last-child .mobileLink {
   border-bottom: none;
 }
 
-.mobileLink::after {
-  content: "↗";
-  font-family: var(--font-body);
-  font-size: 15px;
-  color: var(--color-secondary);
-}
+/* =========================================================
+   INSTAGRAM
+   ========================================================= */
 
 .followSection {
-  padding-bottom: 8px;
+  padding-bottom: 6px;
 }
 
 .socialRow {
   display: flex;
-  gap: 12px;
+  align-items: center;
+
+  gap: 10px;
 }
 
 .socialIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.5);
+
+  width: 45px;
+  height: 45px;
+
+  border-radius: 50%;
+
   border: 1px solid rgba(107, 42, 52, 0.12);
-  color: var(--color-text-primary);
+
+  background: rgba(255, 255, 255, 0.54);
+
+  color: #221e1b;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.socialIcon:hover {
+  transform: translateY(-2px);
+
+  background: #ffffff;
+
+  border-color: rgba(107, 42, 52, 0.24);
+
+  color: #6b2a34;
 }
 
 .socialIcon svg {
@@ -443,9 +896,47 @@
   height: 20px;
 }
 
-@media (max-width: 1024px) {
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
   .container {
-    padding-inline: 32px;
+    padding-inline: 40px;
+
+    gap: 20px;
+  }
+
+  .link {
+    padding-inline: 11px;
+
+    font-size: 9px;
+  }
+
+  .professionalLink {
+    padding-inline: 14px;
+  }
+
+  .ctaButton {
+    padding-inline: 17px;
+  }
+}
+
+/* =========================================================
+   TABLET / MOBILE
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  .navbar {
+    height: 76px;
+  }
+
+  .scrolled {
+    height: 68px;
+  }
+
+  .container {
+    padding-inline: 28px;
   }
 
   .desktopNav {
@@ -459,34 +950,156 @@
   .menuToggle {
     display: flex;
   }
-}
-
-@media (max-width: 768px) {
-  .navbar {
-    height: 76px;
-  }
-
-  .scrolled {
-    height: 68px;
-  }
-
-  .container {
-    padding-inline: 20px;
-  }
-
-  .logo {
-    height: 56px;
-  }
 
   .logoImage {
-    height: 46px;
+    width: 78px;
+    height: 78px;
   }
 
   .scrolled .logoImage {
-    height: 42px;
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .navbar {
+    height: 74px;
+  }
+
+  .scrolled {
+    height: 66px;
+  }
+
+  .container {
+    padding-inline: 18px;
+
+    gap: 12px;
+  }
+
+  .logo {
+    height: 54px;
+  }
+
+  .logoImage {
+    width: 68px;
+    height: 68px;
+  }
+
+  .scrolled .logoImage {
+    width: 62px;
+    height: 62px;
+  }
+
+  .actions {
+    margin-left: auto;
   }
 
   .ctaButton {
     display: none;
+  }
+
+  .menuToggle {
+    width: 42px;
+    height: 42px;
+  }
+
+  .mobileMenu {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+/* =========================================================
+   CELULARES PEQUENOS
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .container {
+    padding-inline: 15px;
+  }
+
+  .mobileMenu {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .mobileMenuBody {
+    gap: 18px;
+
+    padding-top: 22px;
+  }
+
+  .primaryCard,
+  .secondaryCard {
+    min-height: 72px;
+
+    padding: 14px;
+
+    border-radius: 19px;
+  }
+
+  .cardIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .cardTitle {
+    font-size: 16px;
+  }
+
+  .cardSubtitle {
+    font-size: 10px;
+  }
+
+  .mobileLink {
+    min-height: 51px;
+
+    font-size: 19px;
+  }
+}
+
+/* =========================================================
+   ACESSIBILIDADE
+   ========================================================= */
+
+.menuToggle:focus-visible,
+.closeButton:focus-visible,
+.link:focus-visible,
+.professionalLink:focus-visible,
+.ctaButton:focus-visible,
+.mobileLink:focus-visible,
+.primaryCard:focus-visible,
+.secondaryCard:focus-visible,
+.socialIcon:focus-visible {
+  outline: 2px solid #6b2a34;
+
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .logoImage,
+  .link,
+  .professionalLink,
+  .ctaButton,
+  .menuToggle,
+  .mobileMenu,
+  .primaryCard,
+  .secondaryCard,
+  .primaryCard::after,
+  .secondaryCard::after,
+  .mobileLink,
+  .mobileLink::after,
+  .socialIcon {
+    transition: none;
   }
 }

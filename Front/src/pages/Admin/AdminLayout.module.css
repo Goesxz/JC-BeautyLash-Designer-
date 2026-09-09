@@ -4,72 +4,108 @@
   --primary-soft: rgba(59, 91, 254, 0.08);
   --primary-border: rgba(59, 91, 254, 0.14);
 
-  --background: #eef1f8;
+  --background: #f4f6fb;
   --surface: #ffffff;
-  --text: #1a1d29;
-  --text-muted: rgba(26, 29, 41, 0.62);
-  --border: rgba(26, 29, 41, 0.08);
+  --surface-soft: #f7f8fc;
+
+  --text: #171a24;
+  --text-muted: rgba(23, 26, 36, 0.62);
+  --text-soft: rgba(23, 26, 36, 0.46);
+
+  --border: rgba(23, 26, 36, 0.08);
 
   min-height: 100vh;
+
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
+  grid-template-columns: 270px minmax(0, 1fr);
 
   background:
     radial-gradient(
-      circle at top right,
-      rgba(59, 91, 254, 0.045),
+      circle at 100% 0%,
+      rgba(59, 91, 254, 0.055),
       transparent 32rem
     ),
-    #eef1f8;
+    var(--background);
 
   color: var(--text);
 }
 
-/* =========================
+/* =========================================================
    SIDEBAR
-========================= */
+========================================================= */
 
 .sidebar {
   position: sticky;
   top: 0;
 
+  z-index: 20;
+
+  width: 100%;
   height: 100vh;
-  padding: 1.5rem;
+
+  padding: 1.35rem;
 
   display: flex;
   flex-direction: column;
 
   background: rgba(255, 255, 255, 0.94);
-  border-right: 1px solid var(--primary-border);
+
+  border-right: 1px solid var(--border);
+
+  box-shadow:
+    4px 0 25px rgba(23, 26, 36, 0.025);
 
   overflow-y: auto;
 
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(23, 26, 36, 0.12) transparent;
 }
 
-/* =========================
-   BRAND
-========================= */
+/* =========================================================
+   MARCA
+========================================================= */
 
 .brand {
   position: relative;
 
-  display: grid;
-  gap: 0.35rem;
+  display: flex;
+  flex-direction: column;
 
-  padding: 0.75rem 0.5rem 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: 0.3rem;
+
+  padding: 0.75rem 0.65rem 1.35rem;
+
+  margin-bottom: 1.35rem;
 
   border-bottom: 1px solid var(--border);
+}
+
+.brand::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: -1px;
+  left: 0;
+
+  width: 34px;
+  height: 2px;
+
+  border-radius: 999px;
+
+  background: var(--primary);
 }
 
 .brand span {
   color: var(--primary);
 
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 900;
-  letter-spacing: 0.14em;
+
+  letter-spacing: 0.16em;
   line-height: 1;
 
   text-transform: uppercase;
@@ -78,19 +114,22 @@
 .brand strong {
   color: var(--text);
 
-  font-size: 1.55rem;
+  font-size: 1.5rem;
   font-weight: 850;
+
   line-height: 1.1;
-  letter-spacing: -0.04em;
+
+  letter-spacing: -0.045em;
 }
 
-/* =========================
+/* =========================================================
    NAVEGAÇÃO
-========================= */
+========================================================= */
 
 .nav {
   display: grid;
-  gap: 0.35rem;
+
+  gap: 0.3rem;
 }
 
 .navLink {
@@ -99,55 +138,64 @@
   display: flex;
   align-items: center;
 
-  min-height: 48px;
-  padding: 0.85rem 1rem;
+  min-height: 46px;
 
-  border-radius: 14px;
+  padding: 0.78rem 0.9rem;
 
-  text-decoration: none;
+  border-radius: 13px;
+
   color: var(--text-muted);
 
-  font-size: 0.94rem;
+  text-decoration: none;
+
+  font-size: 0.88rem;
   font-weight: 700;
 
   transition:
-    background-color 0.2s ease,
     color 0.2s ease,
+    background-color 0.2s ease,
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
 
 .navLink:hover {
   color: var(--primary);
+
   background: var(--primary-soft);
+
   transform: translateX(3px);
 }
 
 .navLink:focus-visible {
-  outline: 3px solid rgba(59, 91, 254, 0.22);
+  outline: 3px solid rgba(59, 91, 254, 0.2);
   outline-offset: 2px;
 }
 
-/* Item ativo */
+/* =========================================================
+   ITEM ATIVO
+========================================================= */
 
 .navLinkActive {
   color: var(--primary);
-  background: linear-gradient(
-    135deg,
-    rgba(59, 91, 254, 0.11),
-    rgba(59, 91, 254, 0.045)
-  );
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(59, 91, 254, 0.115),
+      rgba(59, 91, 254, 0.045)
+    );
 
   box-shadow:
-    inset 0 0 0 1px rgba(59, 91, 254, 0.08),
-    0 4px 14px rgba(59, 91, 254, 0.06);
+    inset 0 0 0 1px rgba(59, 91, 254, 0.075),
+    0 5px 16px rgba(59, 91, 254, 0.045);
 }
 
 .navLinkActive::before {
   content: "";
 
   position: absolute;
-  left: -1.5rem;
+
+  left: -1.35rem;
 
   width: 4px;
   height: 22px;
@@ -155,29 +203,37 @@
   border-radius: 0 999px 999px 0;
 
   background: var(--primary);
+
+  box-shadow:
+    0 0 12px rgba(59, 91, 254, 0.28);
 }
 
-/* =========================
+/* =========================================================
    LOGOUT
-========================= */
+========================================================= */
 
 .logoutButton {
-  margin-top: auto;
-  padding: 0.95rem 1rem;
+  width: 100%;
 
-  border: 1px solid transparent;
-  border-radius: 14px;
+  margin-top: auto;
+
+  padding: 0.9rem 1rem;
+
+  border: 1px solid rgba(23, 26, 36, 0.08);
+  border-radius: 13px;
 
   background: var(--text);
   color: #fff;
 
   font: inherit;
-  font-size: 0.92rem;
+
+  font-size: 0.86rem;
   font-weight: 800;
 
   cursor: pointer;
 
-  box-shadow: 0 8px 20px rgba(26, 29, 41, 0.12);
+  box-shadow:
+    0 8px 20px rgba(23, 26, 36, 0.11);
 
   transition:
     transform 0.2s ease,
@@ -186,10 +242,12 @@
 }
 
 .logoutButton:hover {
-  background: #12172a;
+  background: #101425;
+
   transform: translateY(-2px);
 
-  box-shadow: 0 12px 24px rgba(26, 29, 41, 0.16);
+  box-shadow:
+    0 12px 25px rgba(23, 26, 36, 0.16);
 }
 
 .logoutButton:active {
@@ -197,13 +255,13 @@
 }
 
 .logoutButton:focus-visible {
-  outline: 3px solid rgba(59, 91, 254, 0.25);
+  outline: 3px solid rgba(59, 91, 254, 0.22);
   outline-offset: 3px;
 }
 
-/* =========================
+/* =========================================================
    CONTEÚDO
-========================= */
+========================================================= */
 
 .content {
   min-width: 0;
@@ -212,40 +270,53 @@
   overflow-x: hidden;
 }
 
-/* =========================
+/* =========================================================
    SCROLLBAR
-========================= */
+========================================================= */
 
 .sidebar::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  background: rgba(26, 29, 41, 0.12);
+  background: rgba(23, 26, 36, 0.12);
+
   border-radius: 999px;
 }
 
-/* =========================
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(23, 26, 36, 0.2);
+}
+
+/* =========================================================
    TABLET
-========================= */
+========================================================= */
 
 @media (max-width: 1100px) {
   .layout {
-    grid-template-columns: 240px minmax(0, 1fr);
+    grid-template-columns: 235px minmax(0, 1fr);
   }
 
   .sidebar {
-    padding: 1.25rem;
+    padding: 1.1rem;
+  }
+
+  .brand {
+    padding-left: 0.5rem;
   }
 
   .navLinkActive::before {
-    left: -1.25rem;
+    left: -1.1rem;
   }
 }
 
-/* =========================
-   MOBILE / TABLET PEQUENO
-========================= */
+/* =========================================================
+   TABLET PEQUENO
+========================================================= */
 
 @media (max-width: 900px) {
   .layout {
@@ -257,33 +328,44 @@
 
     width: 100%;
     height: auto;
-    min-height: auto;
 
     padding: 1rem;
 
     border-right: 0;
-    border-bottom: 1px solid var(--primary-border);
+    border-bottom: 1px solid var(--border);
+
+    box-shadow:
+      0 5px 20px rgba(23, 26, 36, 0.035);
 
     overflow: visible;
   }
 
   .brand {
     margin-bottom: 1rem;
+
     padding: 0.5rem 0.35rem 1rem;
+  }
+
+  .brand strong {
+    font-size: 1.4rem;
   }
 
   .nav {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.5rem;
+
+    gap: 0.45rem;
   }
 
   .navLink {
-    min-height: 46px;
-    padding: 0.75rem;
     justify-content: center;
 
-    font-size: 0.86rem;
+    min-height: 45px;
+
+    padding: 0.7rem;
+
     text-align: center;
+
+    font-size: 0.83rem;
   }
 
   .navLink:hover {
@@ -295,40 +377,59 @@
   }
 
   .logoutButton {
-    margin-top: 1rem;
+    margin-top: 0.85rem;
   }
 }
 
-/* =========================
+/* =========================================================
    CELULAR
-========================= */
+========================================================= */
 
 @media (max-width: 560px) {
   .sidebar {
-    padding: 0.85rem;
+    padding: 0.8rem;
+  }
+
+  .brand {
+    padding: 0.45rem 0.3rem 0.9rem;
+
+    margin-bottom: 0.85rem;
+  }
+
+  .brand span {
+    font-size: 0.64rem;
   }
 
   .brand strong {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
   }
 
   .nav {
     grid-template-columns: 1fr;
+
+    gap: 0.35rem;
   }
 
   .navLink {
     justify-content: flex-start;
-    padding: 0.85rem 1rem;
+
+    min-height: 44px;
+
+    padding: 0.78rem 0.9rem;
+
     text-align: left;
   }
 
   .logoutButton {
     width: 100%;
+
+    margin-top: 0.75rem;
   }
 }
 
-/* Reduz animações para usuários
-   que preferem menos movimento */
+/* =========================================================
+   REDUÇÃO DE MOVIMENTO
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   .navLink,
