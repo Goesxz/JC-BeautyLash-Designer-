@@ -6,7 +6,7 @@ import AdminLayout from "./pages/Admin/AdminLayout";
 import AdminLogin from "./pages/AdminLogin/AdminLogin";
 import Agenda from "./pages/Admin/Agenda/Agenda";
 import Clientes from "./pages/Admin/Clientes/Clientes";
-import Financeiro from "./pages/Admin/Financeiro/financeiro";
+import Financeiro from "./pages/Admin/Financeiro/Financeiro";
 import Servicos from "./pages/Admin/Servicos/Servicos";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute/ProtectedAdminRoute";
 import Relatorios from "./pages/Admin/Relatorios/Relatorios";

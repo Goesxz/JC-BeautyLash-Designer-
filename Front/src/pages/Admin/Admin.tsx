@@ -130,13 +130,12 @@ export default function Admin() {
           </button>
 
           <button
-            href=""
-            type="button"
-            className={styles.logoutButton}
-            onClick={handleLogout}
-          >
-            Sair
-          </button>
+  type="button"
+  className={styles.logoutButton}
+  onClick={handleLogout}
+>
+  Sair
+</button>
         </div>
       </section>
 
