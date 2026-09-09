@@ -63,23 +63,22 @@ A plataforma conecta a **experiência do cliente** (agendamento intuitivo, vitri
 
 ## 📸 Screenshots
 
+## 📸 Screenshots
+
 <div align="center">
 
 ### 1️⃣ Landing Page Principal
-*Interface moderna, responsiva e focada na conversão e elegância visual.*
-<img src="WhatsApp Image 2026-09-09 at 12.51.26.jpeg" alt="Hero Landing Page" width="100%" />
+<img src="./docs/assets/home.jpeg" alt="Hero Landing Page" width="100%" />
 
 <br /><br />
 
 ### 2️⃣ Catálogo de Serviços
-*Listagem dinâmica de procedimentos com indicação de duração, preço e botões diretos de ação.*
-<img src="WhatsApp Image 2026-09-09 at 12.54.18.jpeg" alt="Vitrine de Serviços" width="100%" />
+<img src="./docs/assets/servicos.jpeg" alt="Vitrine de Serviços" width="100%" />
 
 <br /><br />
 
 ### 3️⃣ Formulário de Agendamento Online
-*Fluxo simplificado para solicitação de horários com checagem de disponibilidade.*
-<img src="WhatsApp Image 2026-09-09 at 12.54.37.jpeg" alt="Formulário de Agendamento" width="100%" />
+<img src="./docs/assets/agendamento.jpeg" alt="Formulário de Agendamento" width="100%" />
 
 </div>
 
