@@ -26,5 +26,8 @@
     "eslint-plugin-react-refresh": "^0.4.8",
     "typescript": "^5.2.2",
     "vite": "^5.3.4"
+  },
+  "allowScripts": {
+    "esbuild": true
   }
 }
