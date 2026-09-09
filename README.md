@@ -1,333 +1,104 @@
-# JC Beauty Lash Designer
+<div align="center">
 
-A full-stack appointment and business management system developed for **JC Beauty Lash Designer**.
+  <br />
+  <img src="Front/src/assets/logo.png" alt="JC Beauty Studio Logo" width="120" title="JC Beauty Studio" />
+  <br />
 
-The platform combines a modern customer-facing website with a secure administrative dashboard for managing appointments, clients, services, finances, reports, and business settings.
+  # 💅 JC Beauty Lash Designer
 
----
+  **Full-Stack Appointment & Business Management Platform**
 
-## ✨ Features
+  *Uma solução completa de agendamento online e gestão empresarial desenvolvida sob medida para estúdios de beleza.*
 
-### Customer Experience
+  <p align="center">
+    <a href="#-sobre-o-projeto">Sobre</a> •
+    <a href="#-funcionalidades">Funcionalidades</a> •
+    <a href="#-tecnologias">Tecnologias</a> •
+    <a href="#-screenshots">Screenshots</a> •
+    <a href="#-arquitetura">Arquitetura</a> •
+    <a href="#-instalação">Instalação</a> •
+    <a href="#-api-reference">API</a>
+  </p>
 
-* Online appointment scheduling
-* Service selection
-* Real-time available time checking
-* Services showcase
-* Image gallery
-* Instagram integration
-* WhatsApp contact
-* Business information
-* Frequently Asked Questions
-* Privacy Policy
-* Terms of Use
+  <p align="center">
+    <img src="https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React" />
+    <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Vite-5.x-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+    <img src="https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" />
+    <img src="https://img.shields.io/badge/Express-4.x-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express" />
+    <img src="https://img.shields.io/badge/Prisma-ORM-2D3748?style=for-the-badge&logo=prisma&logoColor=white" alt="Prisma" />
+    <img src="https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite" />
+    <img src="https://img.shields.io/badge/JWT-Protected-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" alt="JWT" />
+  </p>
 
-### Admin Dashboard
-
-* Secure administrator authentication
-* Dashboard overview
-* Appointment management
-* Agenda and timeline
-* Client management
-* Service management
-* Financial management
-* Reports
-* Business settings
-* Protected admin routes
-
-### Appointment Management
-
-* Create appointments
-* Check available time slots
-* Update appointment status
-* Edit appointment information
-* Associate appointments with clients and services
-* Prevent duplicate appointments for the same date and time
+</div>
 
 ---
 
-## 🛠️ Tech Stack
+## 📌 Sobre o Projeto
 
-### Frontend
+O **JC Beauty Lash Designer** é um sistema completo (*Full-Stack*) projetado para centralizar a presença digital e automatizar a gestão operacional de um estúdio especializado em extensão de cílios.
 
-* **React**
-* **TypeScript**
-* **Vite**
-* **React Router**
-* **CSS Modules**
-* **REST API**
-
-### Backend
-
-* **Node.js**
-* **Express**
-* **JavaScript**
-* **Prisma ORM**
-* **SQLite**
-* **JWT Authentication**
-
-### Tools
-
-* **Git**
-* **GitHub**
-* **VS Code**
+A plataforma conecta a **experiência do cliente** (agendamento intuitivo, vitrine de serviços e checagem de horários em tempo real) a um **painel administrativo seguro** que gerencia agenda, clientes, serviços, relatórios e métricas financeiras.
 
 ---
 
-## 📁 Project Structure
+## ✨ Funcionalidades
 
-```text
-JC-BeautyLash-Designer/
-│
-├── Back/
-│   ├── prisma/
-│   │   ├── migrations/
-│   │   ├── schema.prisma
-│   │   └── seed.js
-│   │
-│   └── src/
-│       ├── controllers/
-│       ├── lib/
-│       ├── middlewares/
-│       ├── routes/
-│       ├── services/
-│       ├── utils/
-│       └── server.js
-│
-├── Front/
-│   └── src/
-│       ├── assets/
-│       ├── components/
-│       ├── data/
-│       ├── hooks/
-│       ├── pages/
-│       ├── services/
-│       ├── styles/
-│       ├── types/
-│       ├── utils/
-│       ├── app.tsx
-│       └── main.tsx
-│
-├── .gitignore
-└── README.md
-```
+### 🛍️ Área do Cliente (Landing Page & Agendamento)
+- **Hero Banner Institucional:** Apresentação da marca, proposta de valor e Call-to-Actions rápidos.
+- **Vitrine de Serviços Exclusiva:** Catálogo com preços, tempo de procedimento e opções de *Aplicação* ou *Manutenção* (Brasileiro, Egípcio, Fio a Fio).
+- **Agendamento Inteligente:** Seleção de datas e verificação de horários disponíveis em tempo real sem conflitos.
+- **Canais de Contato Rápidos:** Integração direta com WhatsApp e Instagram.
+- **Informativos Legais:** Seções dedicadas para FAQ, Termos de Uso e Política de Privacidade.
+
+### 🛡️ Dashboard Administrativo
+- **Autenticação Segura:** Login protegido via JSON Web Tokens (JWT) e senhas criptografadas.
+- **Gestão de Agenda & Timeline:** Visualização e atualização de status de agendamentos em tempo real.
+- **Módulo Financeiro & Relatórios:** Acompanhamento de receitas, balanços e métricas de desempenho.
+- **Cadastro de Clientes & Serviços:** Controle detalhado do histórico de atendimentos e catálogo de preços/durações.
+- **Configurações Globais:** Ajustes de dias úteis, horários de funcionamento e regras de negócio.
 
 ---
 
-## 🚀 Getting Started
+## 📸 Screenshots
 
-### Prerequisites
+<div align="center">
 
-Make sure you have the following installed:
+### 1️⃣ Landing Page Principal
+*Interface moderna, responsiva e focada na conversão e elegância visual.*
+<img src="WhatsApp Image 2026-09-09 at 12.51.26.jpeg" alt="Hero Landing Page" width="100%" />
 
-* [Node.js](https://nodejs.org/)
-* npm
-* Git
+<br /><br />
 
----
+### 2️⃣ Catálogo de Serviços
+*Listagem dinâmica de procedimentos com indicação de duração, preço e botões diretos de ação.*
+<img src="WhatsApp Image 2026-09-09 at 12.54.18.jpeg" alt="Vitrine de Serviços" width="100%" />
 
-## ⚙️ Backend Setup
+<br /><br />
 
-Navigate to the backend directory:
+### 3️⃣ Formulário de Agendamento Online
+*Fluxo simplificado para solicitação de horários com checagem de disponibilidade.*
+<img src="WhatsApp Image 2026-09-09 at 12.54.37.jpeg" alt="Formulário de Agendamento" width="100%" />
 
-```bash
-cd Back
-```
-
-Install the dependencies:
-
-```bash
-npm install
-```
-
-Create a `.env` file based on `.env.example`.
-
-Generate the Prisma client:
-
-```bash
-npx prisma generate
-```
-
-Run the database migrations:
-
-```bash
-npx prisma migrate deploy
-```
-
-Start the development server:
-
-```bash
-npm run dev
-```
+</div>
 
 ---
 
-## 💻 Frontend Setup
+## 📐 Arquitetura da Aplicação
 
-Open another terminal and navigate to the frontend directory:
-
-```bash
-cd Front
-```
-
-Install the dependencies:
-
-```bash
-npm install
-```
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
-Vite will provide the local development URL in the terminal.
-
----
-
-## 🗄️ Database
-
-The application uses **SQLite** with **Prisma ORM**.
-
-The main database entities are:
-
-```text
-Client
-   │
-   └── Appointment
-           │
-           └── Service
-```
-
-The system manages relationships between:
-
-* Clients
-* Appointments
-* Services
-
-Appointments also enforce a unique date/time combination to prevent scheduling conflicts.
-
----
-
-## 🔌 API
-
-The backend exposes REST API endpoints for the main business operations.
-
-### Authentication
-
-```text
-POST /admin/login
-```
-
-### Dashboard
-
-```text
-GET /admin/dashboard
-```
-
-### Appointments & Agenda
-
-```text
-GET   /admin/agenda
-GET   /appointments
-POST  /appointments
-PATCH /appointments/:id
-PATCH /appointments/:id/status
-GET   /available-times
-```
-
-### Clients
-
-```text
-GET /admin/clients
-GET /admin/clients/:id
-```
-
-### Services
-
-```text
-GET  /admin/services
-POST /admin/services
-PUT  /admin/services/:id
-```
-
-### Financial & Reports
-
-```text
-GET /admin/financeiro
-GET /admin/reports
-```
-
-### Settings
-
-```text
-GET /admin/settings
-```
-
----
-
-## 🔐 Authentication & Security
-
-The administrative area uses token-based authentication.
-
-Security-related features include:
-
-* JWT authentication
-* Protected API routes
-* Protected frontend admin routes
-* Authentication middleware
-* Environment variable protection
-* Sensitive files excluded through `.gitignore`
-
-Production credentials and private environment variables should never be committed to the repository.
-
----
-
-## 📊 Admin Modules
-
-The administrative dashboard is organized into the following modules:
-
-| Module    | Purpose                             |
-| --------- | ----------------------------------- |
-| Dashboard | Business overview                   |
-| Agenda    | Appointment scheduling and timeline |
-| Clients   | Client management                   |
-| Services  | Service management                  |
-| Finance   | Financial tracking                  |
-| Reports   | Business reports                    |
-| Settings  | Business configuration              |
-
----
-
-## 📌 Project Status
-
-**In active development.**
-
-The project is continuously evolving with improvements to the user experience, administration interface, performance, and business management capabilities.
-
----
-
-## 🎯 Purpose
-
-JC Beauty Lash Designer was designed to centralize the business's digital presence and operational management into a single full-stack application.
-
-The system connects the customer booking experience with an administrative environment, creating a more organized workflow for managing appointments and business data.
-
----
-
-## 👨‍💻 Development
-
-Built as a full-stack web application using a modern frontend architecture, RESTful backend, relational data modeling, and protected administrative workflows.
-
----
-
-## 📄 License
-
-This project is private and intended for **JC Beauty Lash Designer**.
-
----
-
-**JC Beauty Lash Designer**
-
-*Appointment & Business Management System*
+```mermaid
+graph TD
+    Client[Cliente / Browser] -->|HTTP / HTTPS| Frontend[Frontend: React + Vite + TS]
+    Admin[Administrador] -->|Autenticação JWT| Frontend
+    
+    Frontend -->|REST API Requests| Backend[Backend: Node.js + Express]
+    
+    subgraph Servidor Backend
+        Backend --> Auth[Middleware JWT]
+        Backend --> Controllers[Controllers & Routes]
+        Backend --> Services[Business Logic]
+    end
+    
+    Services -->|Prisma Client| ORM[Prisma ORM]
+    ORM -->|SQL Queries| DB[(Database: SQLite)]
