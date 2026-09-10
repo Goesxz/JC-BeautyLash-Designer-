@@ -1,4 +1,5 @@
-export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+export const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 export type NewAppointmentPayload = {
   name: string;
@@ -40,8 +41,47 @@ export async function createAppointment(
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.error || "Erro ao criar agendamento.");
+    throw new Error(
+      data.error || "Erro ao criar agendamento.",
+    );
   }
 
   return data.appointment;
+}
+
+/**
+ * Busca no Backend os horários realmente disponíveis
+ * para determinada data.
+ *
+ * A regra de expediente, duração de 2 horas,
+ * intervalo de almoço e conflitos com outros
+ * agendamentos é definida pelo Backend.
+ */
+export async function getAvailableTimes(
+  date: string,
+): Promise<string[]> {
+  if (!date) {
+    return [];
+  }
+
+  const response = await fetch(
+    `${API_URL}/available-times?date=${encodeURIComponent(date)}`,
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      data.error ||
+        "Erro ao carregar horários disponíveis.",
+    );
+  }
+
+  if (!Array.isArray(data.availableTimes)) {
+    throw new Error(
+      "Resposta inválida ao carregar horários disponíveis.",
+    );
+  }
+
+  return data.availableTimes;
 }

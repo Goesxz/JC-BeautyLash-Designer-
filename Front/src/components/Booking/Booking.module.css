@@ -534,6 +534,15 @@
   gap: 8px;
 }
 
+.scheduleHint {
+  display: block;
+  margin-top: 9px;
+  color: var(--color-text-secondary);
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
 .timeButton {
   min-height: 45px;
   border: 1px solid rgba(107, 42, 52, 0.1);
@@ -1006,6 +1015,9 @@
 }
 
 @media (max-width: 480px) {
+  .scheduleHint {
+  font-size: 9px;
+}
   .booking {
     padding-block: 68px;
   }

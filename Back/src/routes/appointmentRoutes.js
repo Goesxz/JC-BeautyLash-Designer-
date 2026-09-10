@@ -7,8 +7,15 @@ const router = express.Router();
 router.get("/", appointmentController.healthCheck);
 
 // Públicas — usadas pelo formulário de agendamento do site
-router.post("/appointments", appointmentController.createAppointment);
-router.get("/available-times", appointmentController.getAvailableTimes);
+router.post(
+  "/appointments",
+  appointmentController.createAppointment,
+);
+
+router.get(
+  "/available-times",
+  appointmentController.getAvailableTimes,
+);
 
 // Admin — exigem login
 router.get(
@@ -16,11 +23,13 @@ router.get(
   requireAdminAuth,
   appointmentController.listAppointments,
 );
+
 router.patch(
   "/appointments/:id/status",
   requireAdminAuth,
   appointmentController.updateAppointmentStatus,
 );
+
 router.patch(
   "/appointments/:id",
   requireAdminAuth,
@@ -28,3 +37,5 @@ router.patch(
 );
 
 module.exports = router;
+
+
