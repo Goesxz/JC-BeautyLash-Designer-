@@ -645,6 +645,12 @@
 
 /* =========================================================
    MOBILE
+   
+   Novo layout:
+   - Marca em destaque
+   - Navegação + Informações lado a lado
+   - Atendimento + Contato lado a lado
+   - Rodapé inferior organizado
 ========================================================= */
 
 @media (max-width: 560px) {
@@ -687,80 +693,166 @@
     width: calc(100% - 28px);
   }
 
+  /* -------------------------------------------------------
+     MAIN MOBILE
+  ------------------------------------------------------- */
+
   .main {
-    grid-template-columns: 1fr;
-    gap: 38px;
-    padding: 48px 0 42px;
+    display: grid;
+
+    /*
+      2 colunas apenas para os blocos de informação.
+      O brand continua ocupando a largura inteira.
+    */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    column-gap: 24px;
+    row-gap: 38px;
+
+    padding: 44px 0 34px;
   }
 
+  /* -------------------------------------------------------
+     BRAND
+  ------------------------------------------------------- */
+
   .brand {
-    grid-column: auto;
-    max-width: 100%;
-    text-align: center;
+    grid-column: 1 / -1;
+
+    width: 100%;
+    max-width: none;
+
+    padding-bottom: 30px;
+
+    text-align: left;
+
+    border-bottom: 1px solid rgba(80, 45, 30, 0.1);
   }
 
   .logo {
-    margin-bottom: 14px;
+    margin-bottom: 13px;
   }
 
   .logoImage {
-    width: 150px;
-    margin: 0 auto;
+    width: 145px;
+    margin: 0;
   }
 
   .description {
-    max-width: 290px;
-    margin: 0 auto 22px;
+    max-width: 280px;
+    margin: 0 0 20px;
+
     font-size: 0.78rem;
+    line-height: 1.65;
   }
 
   .socialRow {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
+  /* -------------------------------------------------------
+     COLUNAS
+  ------------------------------------------------------- */
+
   .column {
-    align-items: center;
-    text-align: center;
+    width: 100%;
+
+    align-items: flex-start;
+    text-align: left;
   }
 
   .title {
-    margin-bottom: 17px;
+    margin: 0 0 16px;
+
+    /*
+      Mantém a mesma tipografia.
+      Apenas melhora o espaçamento no mobile.
+    */
+    line-height: 1.3;
   }
 
   .list {
-    align-items: center;
+    align-items: flex-start;
+    gap: 10px;
   }
 
   .link {
-    justify-content: center;
+    justify-content: flex-start;
+
+    /*
+      Área de toque confortável no celular.
+    */
+    min-height: 28px;
   }
 
+  /* -------------------------------------------------------
+     ATENDIMENTO
+  ------------------------------------------------------- */
+
   .infoList {
-    align-items: center;
+    align-items: flex-start;
+    gap: 15px;
   }
 
   .infoItem {
+    width: 100%;
     text-align: left;
   }
 
+  .infoIconWrapper {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* -------------------------------------------------------
+     CONTATO
+  ------------------------------------------------------- */
+
   .contactList {
-    align-items: center;
+    align-items: flex-start;
+    gap: 12px;
   }
 
   .contactLink {
+    width: 100%;
+    align-items: flex-start;
     text-align: left;
   }
 
+  .contactIconWrapper {
+    width: 30px;
+    height: 30px;
+  }
+
+  .contactText {
+    padding-top: 1px;
+  }
+
+  /* -------------------------------------------------------
+     BOTTOM
+  ------------------------------------------------------- */
+
   .bottom {
+    display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
     gap: 12px;
-    padding-top: 19px;
-    text-align: center;
+
+    padding: 18px 0 22px;
+
+    text-align: left;
+  }
+
+  .bottom p {
+    max-width: 100%;
   }
 
   .bottomLinks {
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
+    gap: 10px;
   }
 
   .bottom p,
@@ -783,7 +875,30 @@
   }
 
   .main {
-    gap: 34px;
+    column-gap: 18px;
+    row-gap: 34px;
+  }
+
+  .logoImage {
+    width: 135px;
+  }
+
+  .description {
+    max-width: 250px;
+  }
+
+  .infoItem {
+    gap: 8px;
+  }
+
+  .infoIconWrapper,
+  .contactIconWrapper {
+    width: 28px;
+    height: 28px;
+  }
+
+  .contactLink {
+    gap: 8px;
   }
 }
 
@@ -804,4 +919,3 @@
     transition: none;
   }
 }
-
